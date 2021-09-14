@@ -11,8 +11,8 @@ function AboutMe(props) {
           работы.
         </p>
         <ul className="about-me__links">
-          <li className="about-me__item"><a className="about-me__link" href="https://www.facebook.com/profile.php?id=100057730898201">Facebook</a></li>
-          <li className="about-me__item"><a className="about-me__link" href="https://github.com/maximka76667">Github</a></li>
+          <li className="about-me__item"><a className="about-me__link" href="https://www.facebook.com/profile.php?id=100057730898201" target="_blank" rel="noreferrer">Facebook</a></li>
+          <li className="about-me__item"><a className="about-me__link" href="https://github.com/maximka76667" target="_blank" rel="noreferrer">Github</a></li>
         </ul>
       </div>
     </div>
