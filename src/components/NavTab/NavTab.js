@@ -5,13 +5,13 @@ function NavTab(props) {
     <div className="nav-tab">
       <ul className="nav-tab__list">
         <li className="nav-tab__item">
-          <Link className="nav-tab__link" to="/#about">О проекте</Link>
+          <Link className="nav-tab__link" to="/#about-project">О проекте</Link>
         </li>
         <li className="nav-tab__item">
           <Link className="nav-tab__link" to="/#techs">Технологии</Link>
         </li>
         <li className="nav-tab__item">
-          <Link className="nav-tab__link" to="/#portfolio">Студент</Link>
+          <Link className="nav-tab__link" to="/#about-me">Студент</Link>
         </li>
       </ul>
     </div>
