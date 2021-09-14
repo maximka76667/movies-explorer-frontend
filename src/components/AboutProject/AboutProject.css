@@ -1,0 +1,20 @@
+.about-project {
+  padding: 110px 70px;
+}
+
+.about-project__info {
+  display: grid;
+  row-gap: 26px;
+  column-gap: 40px;
+  grid-template-columns: repeat(2, minmax(200px, 550px));
+}
+
+.about-project__card {
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .about-project__info {
+    grid-template-columns: repeat(1, minmax(200px, 550px));
+  }
+}

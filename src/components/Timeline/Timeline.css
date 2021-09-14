@@ -1,0 +1,30 @@
+.timeline {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  grid-auto-rows: 36px;
+  margin-top: 110px;
+}
+
+.timeline__block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timeline__block_type_backend {
+  background-color: #2be080;
+}
+
+.timeline__block_type_frontend {
+  background-color: #f2f2f2;
+}
+
+.timeline__time {
+  margin: 0;
+}
+
+.timeline__part-name {
+  text-align: center;
+  margin: 0;
+}

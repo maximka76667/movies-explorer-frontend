@@ -1,3 +1,4 @@
+import './Main.css';
 import AboutMe from '../AboutMe/AboutMe';
 import AboutProject from '../AboutProject/AboutProject';
 import NavTab from '../NavTab/NavTab';
@@ -8,10 +9,8 @@ import Techs from '../Techs/Techs';
 function Main(props) {
   return (
     <main className="main">
-      <div className="hero">
-        <Promo />
-        <NavTab />
-      </div>
+      <Promo />
+      <NavTab />
       <AboutProject />
       <Techs />
       <AboutMe />

@@ -1,3 +1,4 @@
+import './NavTab.css'
 import { HashLink as Link } from 'react-router-hash-link';
 
 function NavTab(props) {
