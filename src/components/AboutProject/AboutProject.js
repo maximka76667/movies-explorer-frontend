@@ -5,6 +5,7 @@ function AboutProject(props) {
   return (
     <div id="about-project" className="about-project">
       <h2 className="about-project__heading">О проекте</h2>
+      <hr className="about-project__line" />
       <div className="about-project__content">
         <div className="about-project__info">
           <div className="about-project__card">

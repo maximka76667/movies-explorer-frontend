@@ -2,19 +2,51 @@
   padding: 110px 70px;
 }
 
+.about-project__heading {
+  margin: 0 0 23px;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 27px;
+  letter-spacing: -0.04em;
+}
+
+.about-project__line {
+  border: 0;
+  border-bottom: 1px solid #000;
+  margin: 0;
+}
+
 .about-project__info {
   display: grid;
   row-gap: 26px;
   column-gap: 40px;
-  grid-template-columns: repeat(2, minmax(200px, 550px));
+  max-width: 100%;
+  margin: 0 auto;
+  grid-template-columns: repeat(2, minmax(200px, calc((100% - 40px) / 2)));
+  margin-top: 70px;
 }
 
 .about-project__card {
   width: 100%;
 }
 
+.about-project__card-title {
+  margin: 0 0 26px;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: -0.04em;
+}
+
+.about-project__card-text {
+  margin: 0;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+}
+
 @media (max-width: 600px) {
   .about-project__info {
-    grid-template-columns: repeat(1, minmax(200px, 550px));
+    grid-template-columns: repeat(1, minmax(200px, 600px));
   }
 }
