@@ -15,9 +15,6 @@
   list-style-type: none;
 }
 
-.works__item {
-}
-
 .works__item:not(:last-of-type) {
   border-bottom: 1px solid #000;
 }

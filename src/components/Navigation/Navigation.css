@@ -6,21 +6,17 @@
   padding: 18px 70px;
 }
 
-.logo {
+.nav__links {
+  margin: 0 0 0 64px;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  list-style-type: none;
+}
+
+.nav__item {
   display: flex;
   justify-content: center;
-  align-items: center;
-}
-
-.logo__img {
-  width: 38px;
-  height: 38px;
-}
-
-.nav__links {
-  width: 212px;
-  margin-left: 64px;
-  display: flex;
   align-items: center;
 }
 
@@ -29,13 +25,12 @@
   font-weight: 500;
   font-size: 13px;
   line-height: 18px;
+  text-decoration: none;
+  color: #000;
 }
 
 .nav__link_to_movies {
   margin-right: 16px;
-}
-
-.nav__link_to_saved-movies {
 }
 
 .nav__link_to_my-account {
@@ -46,4 +41,44 @@
   justify-content: center;
   align-items: center;
   border-radius: 16px;
+  transition: all 0.3s;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.nav__link_to_my-account:hover {
+  background-color: #3456f3;
+}
+
+.nav__link_to_signup {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  color: #ffffff;
+  margin-right: 30px;
+}
+
+.nav__link_to_signin {
+  display: block;
+  background-color: #2be080;
+  border-radius: 3px;
+  width: 76px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.nav__link_to_signin:hover {
+  background-color: #3456f3;
+}
+
+.nav__link_to_signup {
+  transition: all 0.3s;
+}
+
+.nav__link_to_signup:hover {
+  opacity: 0.5;
 }

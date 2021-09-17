@@ -1,21 +1,23 @@
 import './Main.css';
 import AboutMe from '../AboutMe/AboutMe';
 import AboutProject from '../AboutProject/AboutProject';
-import NavTab from '../NavTab/NavTab';
 import Portfolio from '../Portfolio/Portfolio';
-import Promo from '../Promo/Promo';
 import Techs from '../Techs/Techs';
+import Hero from '../Hero/Hero';
+import Footer from '../Footer/Footer';
 
 function Main(props) {
   return (
-    <main className="main">
-      <Promo />
-      <NavTab />
-      <AboutProject />
-      <Techs />
-      <AboutMe />
-      <Portfolio />
-    </main>
+    <>
+      <Hero />
+      <main className="main">
+        <AboutProject />
+        <Techs />
+        <AboutMe />
+        <Portfolio />
+      </main>
+      <Footer />
+    </>
   )
 }
 

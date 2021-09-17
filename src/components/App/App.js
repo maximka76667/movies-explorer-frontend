@@ -17,12 +17,12 @@ function App() {
         <Route path="/signin">
           Signin
         </Route>
+        <Route path="/" exact>
+          <Main />
+        </Route>
         <Route path="/">
           <Header />
           <Switch>
-            <Route path="/" exact>
-              <Main />
-            </Route>
             <Route path="/movies">
               <Movies />
             </Route>
