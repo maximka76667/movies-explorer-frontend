@@ -6,16 +6,18 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import Register from '../Register/Register';
+import Login from '../Login/Login';
 
 function App() {
   return (
     <div className="app">
       <Switch>
         <Route path="/signup">
-          Signup
+          <Register />
         </Route>
         <Route path="/signin">
-          Signin
+          <Login />
         </Route>
         <Route path="/" exact>
           <Main />
