@@ -43,24 +43,34 @@ function MoviesCardList(props) {
       name: 'Киноальманах «100 лет дизайна»',
       duration: '1ч 17м'
     },
+    {
+      name: 'Киноальманах «100 лет дизайна»',
+      duration: '1ч 17м'
+    },
   ];
 
   function renderCards() {
     const cardsForRender = [];
 
     for (let i = 0; i < 3; i++) {
-      const newCard = cardList[i + renderedCardList.length] || null;
+      const newCardIndex = i + renderedCardList.length
+      const newCard = cardList[newCardIndex];
 
-      if (!newCard) {
+      cardsForRender.push(newCard);
+
+      if (newCardIndex === cardList.length - 1) {
         setIsAllCardsRendered(true);
         break;
       }
-
-      cardsForRender.push(newCard);
     }
 
     setRenderedCardList([...renderedCardList, ...cardsForRender]);
   }
+
+  React.useEffect(() => {
+    renderCards();
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div className="card-list">
@@ -74,7 +84,7 @@ function MoviesCardList(props) {
           }
         </div>
       }
-      {!isAllCardsRendered && <More renderCards={renderCards} />}
+      {!props.isSearching && !isAllCardsRendered && <More renderCards={renderCards} />}
     </div>
   )
 }
