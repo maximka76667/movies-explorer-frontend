@@ -1,6 +1,8 @@
 import React from "react";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
 function Movies(props) {
 
@@ -15,10 +17,14 @@ function Movies(props) {
   }
 
   return (
-    <main className="movies">
-      <SearchForm onSubmit={search} />
-      <MoviesCardList isSearching={isSearching} />
-    </main>
+    <>
+      <Header />
+      <main className="movies">
+        <SearchForm onSubmit={search} />
+        <MoviesCardList isSearching={isSearching} />
+      </main>
+      <Footer />
+    </>
   )
 }
 

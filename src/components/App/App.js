@@ -4,10 +4,9 @@ import { Route, withRouter, Switch } from 'react-router-dom'
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
+import NotFound from '../NotFound/NotFound';
 
 function App() {
   return (
@@ -22,20 +21,17 @@ function App() {
         <Route path="/" exact>
           <Main />
         </Route>
-        <Route path="/profile">
+        <Route path="/profile" exact>
           <Profile />
         </Route>
+        <Route path="/movies" exact>
+          <Movies />
+        </Route>
+        <Route path="/saved-movies" exact>
+          <SavedMovies />
+        </Route>
         <Route path="/">
-          <Header />
-          <Switch>
-            <Route path="/movies">
-              <Movies />
-            </Route>
-            <Route path="/saved-movies">
-              <SavedMovies />
-            </Route>
-          </Switch>
-          <Footer />
+          <NotFound />
         </Route>
       </Switch>
     </div>

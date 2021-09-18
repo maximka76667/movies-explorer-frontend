@@ -1,6 +1,8 @@
 import React from "react";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 
 function SavedMovies(props) {
 
@@ -14,10 +16,14 @@ function SavedMovies(props) {
     }, 1000)
   }
   return (
-    <div className="saved-movies">
-      <SearchForm onSubmit={search} />
-      <MoviesCardList isSearching={isSearching} />
-    </div>
+    <>
+      <Header />
+      <main className="saved-movies">
+        <SearchForm onSubmit={search} />
+        <MoviesCardList isSearching={isSearching} />
+      </main>
+      <Footer />
+    </>
   )
 }
 
