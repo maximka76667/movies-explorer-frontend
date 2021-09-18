@@ -9,11 +9,13 @@
   min-height: 201px;
   border-radius: 6px;
   position: relative;
+  overflow: hidden;
 }
 
 .card__poster-img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 
 .card__info {

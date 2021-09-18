@@ -3,7 +3,7 @@ import './SearchForm.css';
 
 function SearchForm(props) {
   return (
-    <form className="search-form">
+    <form className="search-form" onSubmit={props.onSubmit}>
       <input className="search-form__input" placeholder="Фильм" />
       <button className="search-form__submit-button" type="submit">Найти</button>
       <FilterCheckbox />
