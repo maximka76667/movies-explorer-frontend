@@ -49,9 +49,6 @@ function MoviesCardList(props) {
     const cardsForRender = [];
 
     for (let i = 0; i < 3; i++) {
-      console.log(renderedCardList);
-      console.log(i + renderedCardList.length);
-
       const newCard = cardList[i + renderedCardList.length] || null;
 
       if (!newCard) {
@@ -62,16 +59,8 @@ function MoviesCardList(props) {
       cardsForRender.push(newCard);
     }
 
-    console.log(cardsForRender);
-
     setRenderedCardList([...renderedCardList, ...cardsForRender]);
   }
-
-  React.useEffect(() => {
-    if (renderedCardList.includes({})) {
-      console.log('Карты кончились');
-    }
-  }, renderedCardList)
 
   return (
     <div className="card-list">
