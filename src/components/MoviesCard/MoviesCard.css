@@ -26,7 +26,6 @@
   margin: 0;
   max-width: 250px;
   overflow: hidden;
-  word-wrap: break-word;
   font-weight: 500;
   font-size: 13px;
   line-height: 16px;
@@ -92,43 +91,3 @@
 .card__poster_saved:hover:after {
   background: url("../../images/cancel-icon.svg") 50% 50% no-repeat;
 }
-
-/* .card__save-button {
-  visibility: hidden;
-  opacity: 0;
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  transition: all 0.3s;
-}
-
-.card__poster:hover .card__save-button {
-  display: block;
-  visibility: visible;
-  opacity: 1;
-}
-
-.card__save-button_saved {
-  visibility: visible;
-  opacity: 1;
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  transition: all 0.3s;
-}
-
-.card__save-button_saved {
-  background-color: red;
-}
-
-.card__poster:hover .card__save-button_saved {
-  display: none;
-}
-
-.card__poster:hover .card__save-button_saved:after {
-  content: "X";
-  background-color: grey;
-  position: absolute;
-  top: 5px;
-  right: 5px;
-} */
