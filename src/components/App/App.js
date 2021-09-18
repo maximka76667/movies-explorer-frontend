@@ -20,6 +20,9 @@ function App() {
         <Route path="/" exact>
           <Main />
         </Route>
+        <Route path="/profile">
+          <Profile />
+        </Route>
         <Route path="/">
           <Header />
           <Switch>
@@ -28,9 +31,6 @@ function App() {
             </Route>
             <Route path="/saved-movies">
               <SavedMovies />
-            </Route>
-            <Route path="/profile">
-              <Profile />
             </Route>
           </Switch>
           <Footer />
