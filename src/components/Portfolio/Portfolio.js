@@ -6,13 +6,13 @@ function Portfolio(props) {
       <h2 className="portfolio__heading">Портфолио</h2>
       <ul className="works">
         <li className="works__item">
-          <a className="work" href="#/">
+          <a className="work" href="https://maximka76667.github.io/how-to-learn/">
             <p className="work__name">Статичный сайт</p>
             <p className="work__arrow">↗</p>
           </a>
         </li>
         <li className="works__item">
-          <a className="work" href="#/">
+          <a className="work" href="https://maximka76667.github.io/russian-travel/">
             <p className="work__name">Адаптивный сайт</p>
             <p className="work__arrow">↗</p>
           </a>

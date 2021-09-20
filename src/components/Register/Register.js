@@ -11,17 +11,17 @@ function Register(props) {
         <form className="register__form">
           <div className="register__form-field">
             <label className="register__form-label">Имя</label>
-            <input className="register__form-input" type="text" />
+            <input className="register__form-input" type="text" required />
             <p className="register__form-error"></p>
           </div>
           <div className="register__form-field">
             <label className="register__form-label">E-mail</label>
-            <input className="register__form-input" type="email" />
+            <input className="register__form-input" type="email" required />
             <p className="register__form-error"></p>
           </div>
           <div className="register__form-field">
             <label className="register__form-label">Пароль</label>
-            <input className="register__form-input register__form-input_error" type="password" />
+            <input className="register__form-input register__form-input_error" type="password" required />
             <p className="register__form-error">Что-то пошло не так...</p>
           </div>
           <button className="register__submit-button" type="submit">Зарегистрироваться</button>

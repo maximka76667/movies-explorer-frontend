@@ -77,6 +77,6 @@
   transition: all 0.3s;
 }
 
-.login__login-link:hover {
+.login__register-link:hover {
   color: #2be080;
 }

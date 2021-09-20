@@ -12,10 +12,10 @@ function App() {
   return (
     <div className="app">
       <Switch>
-        <Route path="/signup">
+        <Route path="/signup" exact>
           <Register />
         </Route>
-        <Route path="/signin">
+        <Route path="/signin" exact>
           <Login />
         </Route>
         <Route path="/" exact>

@@ -21,4 +21,9 @@
 
 .nav-tab__link {
   color: #fff;
+  transition: all 0.3s;
+}
+
+.nav-tab__link:hover {
+  opacity: 0.5;
 }
