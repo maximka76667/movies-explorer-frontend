@@ -74,6 +74,7 @@
 
 .nav__link_to_signin:hover {
   background-color: #3456f3;
+  color: #fff;
 }
 
 .nav__link_to_signup {
