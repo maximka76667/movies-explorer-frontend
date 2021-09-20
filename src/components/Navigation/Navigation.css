@@ -83,3 +83,9 @@
 .nav__link_to_signup:hover {
   opacity: 0.5;
 }
+
+@media (max-width: 800px) {
+  .nav {
+    padding: 18px 30px;
+  }
+}

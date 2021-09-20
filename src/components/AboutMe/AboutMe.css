@@ -70,3 +70,9 @@
 .about-me__link:hover {
   opacity: 0.5;
 }
+
+@media (max-width: 800px) {
+  .about-me {
+    padding: 90px 50px;
+  }
+}
