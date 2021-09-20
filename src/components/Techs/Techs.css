@@ -46,7 +46,7 @@
   padding: 0;
 }
 
-.tech {
+.techs__item {
   width: 90px;
   height: 60px;
   display: flex;
@@ -56,7 +56,7 @@
   border-radius: 10px;
 }
 
-.tech:not(:last-of-type) {
+.techs__item:not(:last-of-type) {
   margin-right: 10px;
 }
 
@@ -72,5 +72,15 @@
 @media (max-width: 800px) {
   .techs {
     padding: 90px 50px;
+  }
+
+  .techs__item {
+    width: 84px;
+    height: 57px;
+  }
+
+  .tech__title {
+    font-size: 12px;
+    line-height: 15px;
   }
 }

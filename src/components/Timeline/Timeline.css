@@ -4,6 +4,8 @@
   grid-template-columns: 20% 80%;
   grid-auto-rows: 36px;
   margin-top: 110px;
+  font-size: 14px;
+  line-height: 17px;
 }
 
 .timeline__block {
@@ -27,4 +29,11 @@
 .timeline__part-name {
   text-align: center;
   margin: 0;
+  color: #a0a0a0;
+}
+
+@media (max-width: 800px) {
+  .timeline {
+    margin-top: 93px;
+  }
 }

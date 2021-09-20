@@ -13,6 +13,7 @@
   align-items: center;
   padding: 0;
   text-align: center;
+  margin: 0;
 }
 
 .nav-tab__item:not(:last-of-type) {
@@ -22,6 +23,9 @@
 .nav-tab__link {
   color: #fff;
   transition: all 0.3s;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
 }
 
 .nav-tab__link:hover {

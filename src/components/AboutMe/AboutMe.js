@@ -1,4 +1,5 @@
 import './AboutMe.css'
+import aboutMePhoto from '../../images/about-me-photo.jpg'
 
 function AboutMe(props) {
   return (
@@ -19,7 +20,7 @@ function AboutMe(props) {
             <li className="about-me__item"><a className="about-me__link" href="https://github.com/maximka76667" target="_blank" rel="noreferrer">Github</a></li>
           </ul>
         </div>
-        <img className="about-me__photo" alt="Фото портфолио" />
+        <img className="about-me__photo" src={aboutMePhoto} alt="Фото портфолио" />
       </div>
     </div>
   )

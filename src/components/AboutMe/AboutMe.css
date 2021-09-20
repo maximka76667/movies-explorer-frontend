@@ -48,6 +48,7 @@
 .about-me__photo {
   width: 270px;
   height: 327px;
+  border-radius: 10px;
 }
 
 .about-me__links {
@@ -74,5 +75,32 @@
 @media (max-width: 800px) {
   .about-me {
     padding: 90px 50px;
+  }
+
+  .about-me__name {
+    margin-bottom: 16px;
+    font-size: 40px;
+    line-height: 40px;
+  }
+
+  .about-me__short {
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-me__story {
+    max-width: 364px;
+    margin-top: 20px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-me__photo {
+    width: 255px;
+    height: 307px;
+  }
+
+  .about-me__links {
+    margin-top: 87px;
   }
 }

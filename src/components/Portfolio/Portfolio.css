@@ -7,10 +7,11 @@
   font-size: 18px;
   line-height: 20px;
   color: #a0a0a0;
+  margin: 0;
 }
 
 .works {
-  margin-top: 30px;
+  margin: 30px 0 0;
   padding: 0;
   list-style-type: none;
 }
@@ -51,5 +52,9 @@
 @media (max-width: 800px) {
   .portfolio {
     padding: 0 50px 90px;
+  }
+
+  .work__name {
+    font-size: 28px;
   }
 }

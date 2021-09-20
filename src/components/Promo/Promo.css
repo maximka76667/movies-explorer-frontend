@@ -1,7 +1,7 @@
 .promo {
   padding-top: 74px;
   background-color: #073042;
-  min-height: 664px;
+  min-height: 524px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -27,8 +27,21 @@
   font-weight: normal;
   line-height: 58px;
   letter-spacing: -0.04em;
-  margin: 0 auto;
-  margin-bottom: 40px;
+  margin: 0 auto 40px;
   color: #fff;
   text-align: center;
+}
+
+@media (max-width: 800px) {
+  .promo {
+    min-height: 784px;
+  }
+
+  .promo__heading {
+    margin-bottom: 16px;
+  }
+
+  .promo__logo {
+    margin-bottom: 16px;
+  }
 }
