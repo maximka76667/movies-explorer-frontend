@@ -47,3 +47,9 @@
   letter-spacing: -0.04em;
   margin: 0;
 }
+
+@media (max-width: 800px) {
+  .portfolio {
+    padding: 0 50px 90px;
+  }
+}

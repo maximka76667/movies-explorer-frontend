@@ -50,3 +50,9 @@
     grid-template-columns: repeat(1, minmax(200px, 600px));
   }
 }
+
+@media (max-width: 800px) {
+  .about-project {
+    padding: 90px 50px;
+  }
+}

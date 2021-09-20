@@ -68,3 +68,9 @@
   text-align: center;
   letter-spacing: -0.04em;
 }
+
+@media (max-width: 800px) {
+  .techs {
+    padding: 90px 50px;
+  }
+}
