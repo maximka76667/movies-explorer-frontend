@@ -9,7 +9,7 @@ function MoviesCardList(props) {
   // const [cardList, setCardList] = React.useState(null);
   const [renderedCardList, setRenderedCardList] = React.useState([]);
   const [isAllCardsRendered, setIsAllCardsRendered] = React.useState(false);
-  const [countCardsForRender, setCountCardsForRender] = React.useState(3);
+  // const [countCardsForRender, setCountCardsForRender] = React.useState(3);
 
   const cardList = [
     {
@@ -53,7 +53,7 @@ function MoviesCardList(props) {
   function renderCards() {
     const cardsForRender = [];
 
-    for (let i = 0; i < countCardsForRender; i++) {
+    for (let i = 0; i < 3; i++) {
       const newCardIndex = i + renderedCardList.length
       const newCard = cardList[newCardIndex];
 
@@ -68,16 +68,16 @@ function MoviesCardList(props) {
     setRenderedCardList([...renderedCardList, ...cardsForRender]);
   }
 
-  React.useEffect(() => {
-    window.addEventListener('resize', (e) => {
-      if (window.innerWidth > 800) {
-        setCountCardsForRender(3);
-      }
-      if (window.innerWidth > 600) {
-        setCountCardsForRender(2);
-      }
-    })
-  }, [countCardsForRender])
+  // React.useEffect(() => {
+  //   window.addEventListener('resize', (e) => {
+  //     if (window.innerWidth > 800) {
+  //       setCountCardsForRender(3);
+  //     }
+  //     if (window.innerWidth > 600) {
+  //       setCountCardsForRender(2);
+  //     }
+  //   })
+  // }, [countCardsForRender])
 
   React.useEffect(() => {
     renderCards();

@@ -4,6 +4,7 @@
   align-items: center;
   z-index: 1;
   padding: 18px 70px;
+  position: relative;
 }
 
 @media (max-width: 800px) {
