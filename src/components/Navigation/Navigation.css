@@ -40,6 +40,10 @@
   font-weight: 500;
 }
 
+.nav__link_to_main {
+  display: none;
+}
+
 .nav__link_to_movies {
   margin-right: 16px;
 }
@@ -175,6 +179,10 @@
     border-bottom: 2px solid #000;
   }
 
+  .nav__link_to_main {
+    display: block;
+  }
+
   .nav__link_to_movies {
     margin-right: 0;
   }
@@ -185,9 +193,31 @@
   }
 }
 
-.nav__menu_loc_main {
-  width: 100%;
+.nav_loc_main .nav__burger-icon {
+  display: none;
+}
+
+.nav_loc_main .nav__menu {
+  position: static;
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  padding: 0;
+  height: 38px;
+  width: 100%;
   background-color: transparent;
+  justify-content: flex-end;
+}
+
+.nav_loc_main .nav__links {
+  flex-direction: row;
+  margin: 0;
+}
+
+.nav_loc_main .nav__link {
+  margin: 0;
+  padding: 0;
+}
+
+.nav_loc_main .nav__link_to_signin {
+  margin-left: 30px;
 }
