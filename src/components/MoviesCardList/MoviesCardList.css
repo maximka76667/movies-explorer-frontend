@@ -1,7 +1,14 @@
 .card-list__container {
-  padding: 70px 70px 80px;
+  padding: 70px 70px 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: 30px;
   row-gap: 46px;
+}
+
+@media (max-width: 800px) {
+  .card-list__container {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 70px 30px 0;
+  }
 }

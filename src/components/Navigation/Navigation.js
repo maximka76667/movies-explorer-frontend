@@ -22,8 +22,8 @@ function Navigation(props) {
           ) :
           (
             <ul className="nav__links">
-              <li class="nav__item"><Link className="nav__link nav__link_to_signup" to="/signup">Регистрация</Link></li>
-              <li class="nav__item"><Link className="nav__link nav__link_to_signin" to="/signin">Войти</Link></li>
+              <li className="nav__item"><Link className="nav__link nav__link_to_signup" to="/signup">Регистрация</Link></li>
+              <li className="nav__item"><Link className="nav__link nav__link_to_signin" to="/signin">Войти</Link></li>
             </ul>
           )
       }
