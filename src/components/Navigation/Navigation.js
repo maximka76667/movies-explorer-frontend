@@ -15,11 +15,12 @@ function Navigation(props) {
           (
             <div className="nav__menu">
               <ul className="nav__links">
+                <li className="nav__item"><Link className="nav__link nav__link_to_main" exact to="/" activeClassName="nav__link_active">Главная</Link></li>
                 <li className="nav__item"><Link className="nav__link nav__link_to_movies" to="/movies" activeClassName="nav__link_active">Фильмы</Link></li>
                 <li className="nav__item"><Link className="nav__link nav__link_to_saved-movies" to="/saved-movies" activeClassName="nav__link_active">Сохранённые фильмы</Link></li>
               </ul>
               <Link className="nav__link nav__link_to_my-account" to="/profile">Аккаунт</Link>
-              <div className="nav__close-button" onClick={props.toggleMenu}>X</div>
+              <div className="nav__close-button" onClick={props.toggleMenu}></div>
             </div>
           ) :
           (

@@ -24,6 +24,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .nav__link {
@@ -106,9 +107,10 @@
 }
 
 .nav__burger-icon {
-  width: 50px;
-  height: 50px;
-  background-color: red;
+  width: 38px;
+  height: 38px;
+  background: url(../../images/burger-menu-icon.svg) 50% no-repeat;
+  background-size: cover;
   display: none;
 }
 
@@ -122,7 +124,6 @@
     height: 100vh;
     padding: 160px 90px 90px;
     box-sizing: border-box;
-    justify-content: center;
     align-items: center;
     position: fixed;
   }
@@ -146,10 +147,14 @@
   }
 
   .nav__close-button {
-    display: none;
+    display: flex;
+    width: 22px;
+    height: 22px;
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 22px;
+    right: 22px;
+    background: url(../../images/close-icon.svg) 50% 50% no-repeat;
+    background-size: cover;
   }
 
   .nav_open .nav__menu {
@@ -158,10 +163,26 @@
     right: 0;
     bottom: 0;
   }
-}
 
-.nav_open .nav__close-button {
-  display: block;
+  .nav__link {
+    font-weight: 500;
+    display: flex;
+    padding-bottom: 4px;
+    margin-bottom: 22px;
+  }
+
+  .nav__link_active {
+    border-bottom: 2px solid #000;
+  }
+
+  .nav__link_to_movies {
+    margin-right: 0;
+  }
+
+  .nav__link_to_my-account {
+    margin: 0;
+    padding: 0;
+  }
 }
 
 .nav__menu_loc_main {
