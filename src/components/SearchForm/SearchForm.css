@@ -46,3 +46,17 @@
     padding: 80px 30px 10px;
   }
 }
+
+@media (max-width: 650px) {
+  .search-form {
+    padding: 80px 14px 10px;
+  }
+
+  .search-form__input {
+    margin-bottom: 0;
+  }
+
+  .search-form__line {
+    margin: 0;
+  }
+}

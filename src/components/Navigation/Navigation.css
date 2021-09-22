@@ -126,10 +126,11 @@
   }
 
   .nav_with-menu .nav__menu {
-    display: none;
+    opacity: 0;
+    visibility: hidden;
     flex-direction: column;
     right: 0;
-    width: 520px;
+    width: 0;
     background-color: #fff;
     height: 100vh;
     padding: 160px 90px 90px;
@@ -137,6 +138,13 @@
     align-items: center;
     position: fixed;
     justify-content: space-between;
+    transition: all 0.3s;
+  }
+
+  .nav_open .nav__menu {
+    width: 520px;
+    opacity: 1;
+    visibility: visible;
   }
 
   .nav_open .nav__overlay {
@@ -162,8 +170,8 @@
     width: 22px;
     height: 22px;
     position: absolute;
-    top: 22px;
-    right: 22px;
+    top: 29px;
+    right: 29px;
     background: url(../../images/close-icon.svg) 50% 50% no-repeat;
     background-size: cover;
   }
@@ -209,6 +217,27 @@
 
   .nav__link_to_signin {
     font-size: 10px;
+    line-height: 16px;
+  }
+
+  .nav_with-menu .nav__menu {
+    width: 0;
+  }
+
+  .nav_open .nav__menu {
+    width: 100%;
+    padding: 144px 10px 45px;
+  }
+
+  .nav_with-menu .nav__link {
+    font-size: 18px;
+    line-height: 22px;
+    padding-bottom: 7px;
+  }
+
+  .nav_with-menu .nav__link_to_my-account {
+    padding: 0;
+    font-size: 14px;
     line-height: 16px;
   }
 }
