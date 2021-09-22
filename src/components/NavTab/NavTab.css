@@ -31,3 +31,10 @@
 .nav-tab__link:hover {
   opacity: 0.5;
 }
+
+@media (max-width: 650px) {
+  .nav-tab__link {
+    font-size: 11px;
+    line-height: 16px;
+  }
+}

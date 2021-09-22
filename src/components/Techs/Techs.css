@@ -44,20 +44,19 @@
   display: flex;
   margin: 100px 0 0;
   padding: 0;
+  display: grid;
+  grid-template-columns: repeat(7, 84px);
+  column-gap: 10px;
 }
 
 .techs__item {
-  width: 90px;
+  width: 100%;
   height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #e8e8e8;
   border-radius: 10px;
-}
-
-.techs__item:not(:last-of-type) {
-  margin-right: 10px;
 }
 
 .tech__title {
@@ -82,5 +81,32 @@
   .tech__title {
     font-size: 12px;
     line-height: 15px;
+  }
+}
+
+@media (max-width: 650px) {
+  .techs {
+    padding: 70px 18px;
+  }
+
+  .techs__heading {
+    margin-bottom: 28px;
+  }
+
+  .techs__subheading {
+    font-size: 30px;
+    line-height: 36px;
+    margin: 60px 0 24px;
+  }
+
+  .techs__text {
+    font-size: 11px;
+    line-height: 16px;
+  }
+
+  .techs__list {
+    margin: 50px 0 0;
+    grid-template-columns: repeat(2, 84px);
+    row-gap: 10px;
   }
 }

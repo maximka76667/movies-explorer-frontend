@@ -21,7 +21,7 @@
 }
 
 .work {
-  padding: 20px 0 20px;
+  padding: 20px 0;
   display: flex;
   justify-content: space-between;
   text-decoration: none;
@@ -56,5 +56,26 @@
 
   .work__name {
     font-size: 28px;
+  }
+}
+
+@media (max-width: 650px) {
+  .portfolio {
+    padding: 0 14px 70px;
+  }
+
+  .works {
+    margin-top: 20px;
+  }
+
+  .work__name {
+    font-size: 18px;
+    line-height: 28px;
+  }
+
+  .work__arrow {
+    width: 18px;
+    font-size: 18px;
+    line-height: 28px;
   }
 }

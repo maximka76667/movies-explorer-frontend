@@ -45,3 +45,19 @@
     margin-bottom: 16px;
   }
 }
+
+@media (max-width: 650px) {
+  .promo {
+    min-height: 570px;
+  }
+
+  .promo__heading {
+    margin-bottom: 38px;
+    font-size: 31px;
+    line-height: 39px;
+  }
+
+  .promo__logo {
+    margin-bottom: 38px;
+  }
+}

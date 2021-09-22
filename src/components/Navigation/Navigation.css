@@ -74,15 +74,6 @@
   color: #fff;
 }
 
-.nav__link_to_signup {
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 16px;
-  text-align: center;
-  color: #ffffff;
-  margin-right: 30px;
-}
-
 .nav__link_to_signin {
   display: block;
   background-color: #2be080;
@@ -108,6 +99,9 @@
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
+  text-align: center;
+  color: #ffffff;
+  margin-right: 30px;
 }
 
 .nav__link_to_signup:hover {
@@ -203,5 +197,18 @@
   .nav_with-menu .nav__link_to_my-account {
     margin: 0;
     padding: 0;
+  }
+}
+
+@media (max-width: 650px) {
+  .nav__link_to_signup {
+    font-size: 10px;
+    line-height: 16px;
+    margin-right: 14px;
+  }
+
+  .nav__link_to_signin {
+    font-size: 10px;
+    line-height: 16px;
   }
 }
