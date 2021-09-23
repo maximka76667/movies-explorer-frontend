@@ -7,87 +7,104 @@ import './MoviesCardList.css';
 
 function MoviesCardList(props) {
 
-  // const [cardList, setCardList] = React.useState(null);
+  const [cardList, setCardList] = React.useState([]);
   const [renderedCardList, setRenderedCardList] = React.useState([]);
   const [isAllCardsRendered, setIsAllCardsRendered] = React.useState(false);
-  // const [countCardsForRender, setCountCardsForRender] = React.useState(3);
+  const [countCardsOfWidth, setCountCardsOfWidth] = React.useState(0);
 
   const location = useLocation();
 
-  const cardList = [
-    {
-      name: '33 слова о дизайне1',
-      duration: '1ч 17м'
-    },
-    {
-      name: 'Киноальманах «100 лет дизайна»2',
-      duration: '1ч 17м'
-    },
-    {
-      name: 'Киноальманах «100 лет дизайна»3',
-      duration: '1ч 17м'
-    },
-    {
-      name: 'Киноальманах «100 лет дизайна»4',
-      duration: '1ч 17м'
-    },
-    {
-      name: 'Киноальманах «100 лет дизайна»5',
-      duration: '1ч 17м'
-    },
-    {
-      name: 'Киноальманах «100 лет дизайна»6',
-      duration: '1ч 17м'
-    },
-    {
-      name: 'Киноальманах «100 лет дизайна»7',
-      duration: '1ч 17м'
-    },
-    {
-      name: 'Киноальманах «100 лет дизайна»8',
-      duration: '1ч 17м'
-    },
-    {
-      name: 'Киноальманах «100 лет дизайна»9',
-      duration: '1ч 17м'
-    },
-  ];
-
-  function renderCards() {
+  const renderCards = (cardsCount, renderedCards) => {
+    console.log('rendered list ' + renderedCards.length);
     const cardsForRender = [];
 
-    const countCardsForRender = location.pathname === "/saved-movies" ? cardList.length : 3;
+    const countCardsForRender = location.pathname === "/saved-movies" ? cardList.length : cardsCount;
 
     for (let i = 0; i < countCardsForRender; i++) {
-      const newCardIndex = i + renderedCardList.length
+      const newCardIndex = i + renderedCards.length
       const newCard = cardList[newCardIndex];
 
-      cardsForRender.push(newCard);
+      console.log(i);
 
-      if (newCardIndex === cardList.length - 1) {
+      if (newCardIndex >= cardList.length - 1) {
+        if (newCardIndex === cardList.length - 1) {
+          cardsForRender.push(newCard);
+        }
         setIsAllCardsRendered(true);
         break;
       }
+
+      cardsForRender.push(newCard);
     }
 
-    setRenderedCardList([...renderedCardList, ...cardsForRender]);
+    setRenderedCardList([...renderedCards, ...cardsForRender]);
   }
 
-  // React.useEffect(() => {
-  //   window.addEventListener('resize', (e) => {
-  //     if (window.innerWidth > 800) {
-  //       setCountCardsForRender(3);
-  //     }
-  //     if (window.innerWidth > 600) {
-  //       setCountCardsForRender(2);
-  //     }
-  //   })
-  // }, [countCardsForRender])
+  function checkCountOfCards() {
+    if (window.innerWidth > 800) {
+      setCountCardsOfWidth(3);
+    }
+    if (window.innerWidth > 650 && window.innerWidth <= 800) {
+      setCountCardsOfWidth(2);
+    }
+  }
 
   React.useEffect(() => {
-    renderCards();
+    setCardList([
+      {
+        name: '33 слова о дизайне1',
+        duration: '1ч 17м'
+      },
+      {
+        name: 'Киноальманах «100 лет дизайна»2',
+        duration: '1ч 17м'
+      },
+      {
+        name: 'Киноальманах «100 лет дизайна»3',
+        duration: '1ч 17м'
+      },
+      {
+        name: 'Киноальманах «100 лет дизайна»4',
+        duration: '1ч 17м'
+      },
+      {
+        name: 'Киноальманах «100 лет дизайна»5',
+        duration: '1ч 17м'
+      },
+      {
+        name: 'Киноальманах «100 лет дизайна»6',
+        duration: '1ч 17м'
+      },
+      {
+        name: 'Киноальманах «100 лет дизайна»7',
+        duration: '1ч 17м'
+      },
+      {
+        name: 'Киноальманах «100 лет дизайна»8',
+        duration: '1ч 17м'
+      },
+      {
+        name: 'Киноальманах «100 лет дизайна»9',
+        duration: '1ч 17м'
+      },
+    ]);
+
+    window.addEventListener('resize', (e) => {
+      checkCountOfCards();
+    })
+
+    checkCountOfCards();
+
+    renderCards(countCardsOfWidth, []);
     // eslint-disable-next-line
   }, []);
+
+  React.useEffect(() => {
+    console.log("card to render: " + countCardsOfWidth);
+    setIsAllCardsRendered(false);
+    renderCards(countCardsOfWidth, []);
+    // eslint-disable-next-line
+  }, [countCardsOfWidth])
 
   return (
     <div className="card-list">
@@ -101,7 +118,7 @@ function MoviesCardList(props) {
           }
         </div>
       }
-      {!props.isSearching && <More renderCards={renderCards} isAllCardsRendered={isAllCardsRendered} />}
+      {!props.isSearching && <More renderCards={renderCards} isAllCardsRendered={isAllCardsRendered} countCardsOfWidth={countCardsOfWidth} renderedCardList={renderedCardList} />}
     </div>
   )
 }
