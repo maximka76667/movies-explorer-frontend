@@ -1,5 +1,4 @@
 .promo {
-  padding-top: 74px;
   background-color: #073042;
   min-height: 524px;
   position: relative;
@@ -59,5 +58,7 @@
 
   .promo__logo {
     margin-bottom: 38px;
+    width: 248px;
+    height: 248px;
   }
 }
