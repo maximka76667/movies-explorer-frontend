@@ -217,10 +217,6 @@
     line-height: 16px;
   }
 
-  .nav_with-menu .nav__menu {
-    width: 0;
-  }
-
   .nav_open .nav__menu {
     width: 100%;
     padding: 144px 10px 45px;

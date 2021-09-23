@@ -17,6 +17,11 @@
 .login__form-field {
   display: flex;
   flex-direction: column;
+  margin-bottom: 40px;
+}
+
+.login__form-field:not(:last-of-type) {
+  margin-bottom: 24px;
 }
 
 .login__form-label {
@@ -32,7 +37,7 @@
   font-size: 14px;
   line-height: 17px;
   border: 0;
-  margin: 0 0 24px;
+  margin: 0;
   padding: 0 0 10px 0;
   outline: 0;
   border-bottom: 1px solid #e8e8e8;
@@ -44,10 +49,10 @@
 
 .login__submit-button {
   width: 100%;
-  margin: 128px 0 16px;
+  margin: 70px 0 16px;
   background-color: #3456f3;
   border-radius: 3px;
-  padding: 14px 125px;
+  padding: 14px;
   border: 0;
   outline: 0;
   color: #fff;
@@ -79,4 +84,35 @@
 
 .login__register-link:hover {
   color: #2be080;
+}
+
+@media (max-width: 650px) {
+  .login {
+    padding: 56px 30px 30px;
+  }
+
+  .login__heading {
+    text-align: center;
+    margin: 50px 0 80px;
+    font-size: 24px;
+    line-height: 29px;
+  }
+
+  .login__content {
+    width: 100%;
+  }
+
+  .login__submit-button {
+    margin-top: 270px;
+  }
+
+  .login__register {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .login__register-link {
+    font-size: 12px;
+    line-height: 15px;
+  }
 }

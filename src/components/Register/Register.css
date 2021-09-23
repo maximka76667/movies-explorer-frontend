@@ -60,7 +60,7 @@
   margin: 128px 0 16px;
   background-color: #3456f3;
   border-radius: 3px;
-  padding: 14px 125px;
+  padding: 14px;
   border: 0;
   outline: 0;
   color: #fff;
@@ -92,4 +92,35 @@
 
 .register__login-link:hover {
   color: #2be080;
+}
+
+@media (max-width: 650px) {
+  .register {
+    padding: 56px 30px 30px;
+  }
+
+  .register__heading {
+    text-align: center;
+    margin: 50px 0 80px;
+    font-size: 24px;
+    line-height: 29px;
+  }
+
+  .register__content {
+    width: 100%;
+  }
+
+  .register__submit-button {
+    margin-top: 220px;
+  }
+
+  .register__login {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .register__login-link {
+    font-size: 12px;
+    line-height: 15px;
+  }
 }
