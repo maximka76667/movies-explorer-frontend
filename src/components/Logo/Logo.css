@@ -19,3 +19,9 @@
 .logo:hover .logo__part {
   fill: #3456f3;
 }
+
+@media (max-width: 650px) {
+  .logo {
+    margin: 0 auto;
+  }
+}

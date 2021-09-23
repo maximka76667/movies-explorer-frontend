@@ -133,11 +133,14 @@
     width: 0;
     background-color: #fff;
     height: 100vh;
-    padding: 160px 90px 90px;
     box-sizing: border-box;
     align-items: center;
     position: fixed;
     justify-content: space-between;
+    display: flex;
+    top: 0;
+    right: 0;
+    bottom: 0;
     transition: all 0.3s;
   }
 
@@ -145,6 +148,7 @@
     width: 520px;
     opacity: 1;
     visibility: visible;
+    padding: 160px 90px 90px;
   }
 
   .nav_open .nav__overlay {
@@ -174,13 +178,6 @@
     right: 29px;
     background: url(../../images/close-icon.svg) 50% 50% no-repeat;
     background-size: cover;
-  }
-
-  .nav_open .nav__menu {
-    display: flex;
-    top: 0;
-    right: 0;
-    bottom: 0;
   }
 
   .nav_with-menu .nav__link {
