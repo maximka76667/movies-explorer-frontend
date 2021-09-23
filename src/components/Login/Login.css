@@ -91,6 +91,10 @@
     padding: 56px 30px 30px;
   }
 
+  .login .logo {
+    margin: 0 auto;
+  }
+
   .login__heading {
     text-align: center;
     margin: 50px 0 80px;

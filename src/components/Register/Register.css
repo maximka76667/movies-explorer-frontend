@@ -99,6 +99,10 @@
     padding: 56px 30px 30px;
   }
 
+  .register .logo {
+    margin: 0 auto;
+  }
+
   .register__heading {
     text-align: center;
     margin: 50px 0 80px;
