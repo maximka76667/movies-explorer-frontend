@@ -15,7 +15,6 @@ function MoviesCardList(props) {
   const location = useLocation();
 
   const renderCards = (cardsCount, renderedCards) => {
-    console.log('rendered list ' + renderedCards.length);
     const cardsForRender = [];
 
     const countCardsForRender = location.pathname === "/saved-movies" ? cardList.length : cardsCount;
@@ -23,8 +22,6 @@ function MoviesCardList(props) {
     for (let i = 0; i < countCardsForRender; i++) {
       const newCardIndex = i + renderedCards.length
       const newCard = cardList[newCardIndex];
-
-      console.log(i);
 
       if (newCardIndex >= cardList.length - 1) {
         if (newCardIndex === cardList.length - 1) {
@@ -41,11 +38,18 @@ function MoviesCardList(props) {
   }
 
   function checkCountOfCards() {
-    if (window.innerWidth > 800) {
+    const width = window.innerWidth;
+
+    if (width > 800) {
       setCountCardsOfWidth(3);
     }
-    if (window.innerWidth > 650 && window.innerWidth <= 800) {
+
+    if (width > 650 && width <= 800) {
       setCountCardsOfWidth(2);
+    }
+
+    if (width <= 650) {
+      setCountCardsOfWidth(1);
     }
   }
 
@@ -100,7 +104,6 @@ function MoviesCardList(props) {
   }, []);
 
   React.useEffect(() => {
-    console.log("card to render: " + countCardsOfWidth);
     setIsAllCardsRendered(false);
     renderCards(countCardsOfWidth, []);
     // eslint-disable-next-line
