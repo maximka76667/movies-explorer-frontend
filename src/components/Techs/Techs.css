@@ -84,6 +84,13 @@
   }
 }
 
+@media (max-width: 700px) {
+  .techs__list {
+    row-gap: 10px;
+    grid-template-columns: repeat(3, 84px);
+  }
+}
+
 @media (max-width: 650px) {
   .techs {
     padding: 70px 18px;
@@ -107,6 +114,5 @@
   .techs__list {
     margin: 50px 0 0;
     grid-template-columns: repeat(2, 84px);
-    row-gap: 10px;
   }
 }
