@@ -1,0 +1,236 @@
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: calc(100% - 64px);
+  position: relative;
+}
+
+.nav_with-menu {
+  justify-content: space-between;
+}
+
+.nav__menu {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nav__links {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  list-style-type: none;
+}
+
+.nav_with-menu .nav__links {
+  margin: 0 auto;
+}
+
+.nav__item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.nav__link {
+  height: 18px;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  text-decoration: none;
+  color: #000;
+}
+
+.nav__link_active {
+  font-weight: 500;
+}
+
+.nav__link_to_main {
+  display: none;
+}
+
+.nav__link_to_movies {
+  margin-right: 16px;
+}
+
+.nav__link_to_my-account {
+  width: 100px;
+  height: 32px;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  transition: all 0.3s;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.nav__link_to_my-account:hover {
+  background-color: #3456f3;
+  color: #fff;
+}
+
+.nav__link_to_signin {
+  display: block;
+  background-color: #2be080;
+  border-radius: 3px;
+  width: 76px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.nav__link_to_signin:hover {
+  background-color: #3456f3;
+  color: #fff;
+}
+
+.nav__link_to_signup {
+  transition: all 0.3s;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  color: #ffffff;
+  margin-right: 30px;
+}
+
+.nav__link_to_signup:hover {
+  opacity: 0.5;
+}
+
+.nav__close-button {
+  display: none;
+}
+
+.nav__burger-icon {
+  width: 38px;
+  height: 38px;
+  background: url(../../images/burger-menu-icon.svg) 50% no-repeat;
+  background-size: cover;
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .nav_with-menu {
+    justify-content: flex-end;
+  }
+
+  .nav_with-menu .nav__menu {
+    opacity: 0;
+    visibility: hidden;
+    flex-direction: column;
+    right: 0;
+    width: 0;
+    background-color: #fff;
+    height: 100vh;
+    box-sizing: border-box;
+    align-items: center;
+    position: fixed;
+    justify-content: space-between;
+    display: flex;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    transition: all 0.3s;
+  }
+
+  .nav_open .nav__menu {
+    width: 520px;
+    opacity: 1;
+    visibility: visible;
+    padding: 160px 90px 90px;
+  }
+
+  .nav_open .nav__overlay {
+    background-color: #000;
+    opacity: 0.3;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  .nav_with-menu .nav__burger-icon {
+    display: block;
+  }
+
+  .nav_with-menu .nav__links {
+    flex-direction: column;
+  }
+
+  .nav_with-menu .nav__close-button {
+    display: flex;
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    top: 29px;
+    right: 29px;
+    background: url(../../images/close-icon.svg) 50% 50% no-repeat;
+    background-size: cover;
+  }
+
+  .nav_with-menu .nav__link {
+    font-weight: 500;
+    display: flex;
+    padding-bottom: 4px;
+    margin-bottom: 22px;
+  }
+
+  .nav_with-menu .nav__link_active {
+    border-bottom: 2px solid #000;
+  }
+
+  .nav_with-menu .nav__link_to_main {
+    display: block;
+  }
+
+  .nav_with-menu .nav__link_to_movies {
+    margin-right: 0;
+  }
+
+  .nav_with-menu .nav__link_to_my-account {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@media (max-width: 650px) {
+  .nav__link_to_signup {
+    font-size: 10px;
+    line-height: 16px;
+    margin-right: 14px;
+  }
+
+  .nav__link_to_signin {
+    font-size: 10px;
+    line-height: 16px;
+  }
+
+  .nav_open .nav__menu {
+    width: 100%;
+    padding: 144px 10px 45px;
+  }
+
+  .nav_with-menu .nav__link {
+    font-size: 18px;
+    line-height: 22px;
+    padding-bottom: 7px;
+  }
+
+  .nav_with-menu .nav__link_to_my-account {
+    padding: 0;
+    font-size: 14px;
+    line-height: 16px;
+  }
+}

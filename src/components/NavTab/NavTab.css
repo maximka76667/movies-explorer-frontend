@@ -1,0 +1,40 @@
+.nav-tab {
+  height: 66px;
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  background-color: #000;
+}
+
+.nav-tab__list {
+  display: flex;
+  list-style-type: none;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  text-align: center;
+  margin: 0;
+}
+
+.nav-tab__item:not(:last-of-type) {
+  margin-right: 40px;
+}
+
+.nav-tab__link {
+  color: #fff;
+  transition: all 0.3s;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.nav-tab__link:hover {
+  opacity: 0.5;
+}
+
+@media (max-width: 650px) {
+  .nav-tab__link {
+    font-size: 11px;
+    line-height: 16px;
+  }
+}

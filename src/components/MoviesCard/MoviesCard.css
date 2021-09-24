@@ -1,0 +1,114 @@
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.card__poster {
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.card__poster:after {
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  content: "Сохранить";
+  width: 72px;
+  height: 21px;
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  transition: opacity 0.3s, right 0.3s, visibility 0.3s, background 0.3s,
+    width 0.2s;
+  padding: 6px 7px;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 9px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.card__poster:hover:after {
+  display: flex;
+  visibility: visible;
+  opacity: 1;
+}
+
+.card__poster_saved:after {
+  display: flex;
+  visibility: visible;
+  opacity: 1;
+  content: "";
+  width: 21px;
+  height: 21px;
+  background: url("../../images/check-icon.svg") 50% 50% no-repeat;
+  background-size: cover;
+  position: absolute;
+  padding: 5px;
+}
+
+.card__poster_saved:hover:after {
+  background: url("../../images/cancel-icon.svg") 50% 50% no-repeat;
+}
+
+.card__poster-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.card__info {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px;
+}
+
+.card__name {
+  margin: 0;
+  max-width: 250px;
+  overflow: hidden;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.card__duration {
+  margin: 0 0 0 30px;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 10px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #a0a0a0;
+  background-color: #f9f9f9;
+  padding: 3px 4px;
+}
+
+@media (max-width: 650px) {
+  .card__info {
+    padding: 16px 0;
+  }
+
+  .card__name {
+    max-width: 240px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .card__duration {
+    margin: 0 0 0 8px;
+    font-size: 11px;
+    line-height: 10px;
+  }
+}

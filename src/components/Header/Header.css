@@ -1,0 +1,20 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1;
+  padding: 18px 70px;
+  position: relative;
+}
+
+@media (max-width: 800px) {
+  .header {
+    padding: 18px 30px;
+  }
+}
+
+@media (max-width: 650px) {
+  .header {
+    padding: 18px 14px;
+  }
+}
