@@ -98,16 +98,17 @@ function MoviesCardList(props) {
     })
 
     checkCountOfCards();
-
-    renderCards(countCardsOfWidth, []);
+    // setRenderedCardList([]);
+    renderCards(countCardsOfWidth, renderedCardList);
     // eslint-disable-next-line
   }, []);
 
   React.useEffect(() => {
     setIsAllCardsRendered(false);
+    setRenderedCardList([]);
     renderCards(countCardsOfWidth, []);
     // eslint-disable-next-line
-  }, [countCardsOfWidth])
+  }, [countCardsOfWidth]);
 
   return (
     <div className="card-list">
