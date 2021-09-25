@@ -35,6 +35,7 @@
   background-color: #f9f9f9;
   border-radius: 30px;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .card:hover .card__save-button {
