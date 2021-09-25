@@ -12,11 +12,11 @@
   cursor: pointer;
 }
 
-.card__poster:after {
+.card__save-button {
+  border: 0;
   display: flex;
   visibility: hidden;
   opacity: 0;
-  content: "Сохранить";
   width: 72px;
   height: 21px;
   position: absolute;
@@ -37,17 +37,16 @@
   overflow: hidden;
 }
 
-.card__poster:hover:after {
+.card:hover .card__save-button {
   display: flex;
   visibility: visible;
   opacity: 1;
 }
 
-.card__poster_saved:after {
+.card_saved .card__save-button {
   display: flex;
   visibility: visible;
   opacity: 1;
-  content: "";
   width: 21px;
   height: 21px;
   background: url("../../images/check-icon.svg") 50% 50% no-repeat;
@@ -56,7 +55,7 @@
   padding: 5px;
 }
 
-.card__poster_saved:hover:after {
+.card_saved:hover .card__save-button {
   background: url("../../images/cancel-icon.svg") 50% 50% no-repeat;
 }
 
