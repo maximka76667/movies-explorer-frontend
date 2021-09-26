@@ -10,6 +10,7 @@
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  height: 200px;
 }
 
 .card__save-button {
@@ -95,6 +96,12 @@
   padding: 3px 4px;
 }
 
+@media (max-width: 800px) {
+  .card__poster {
+    height: 190px;
+  }
+}
+
 @media (max-width: 650px) {
   .card__info {
     padding: 16px 0;
@@ -110,5 +117,9 @@
     margin: 0 0 0 8px;
     font-size: 11px;
     line-height: 10px;
+  }
+
+  .card__poster {
+    min-height: 168px;
   }
 }

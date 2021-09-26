@@ -4,6 +4,7 @@ import More from '../More/More';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Preloader from '../Preloader/Preloader';
 import './MoviesCardList.css';
+import moviesApi from '../../utils/MoviesApi';
 
 function MoviesCardList(props) {
 
@@ -54,52 +55,20 @@ function MoviesCardList(props) {
   }
 
   React.useEffect(() => {
-    setCardList([
-      {
-        name: '33 слова о дизайне1',
-        duration: '1ч 17м'
-      },
-      {
-        name: 'Киноальманах «100 лет дизайна»2',
-        duration: '1ч 17м'
-      },
-      {
-        name: 'Киноальманах «100 лет дизайна»3',
-        duration: '1ч 17м'
-      },
-      {
-        name: 'Киноальманах «100 лет дизайна»4',
-        duration: '1ч 17м'
-      },
-      {
-        name: 'Киноальманах «100 лет дизайна»5',
-        duration: '1ч 17м'
-      },
-      {
-        name: 'Киноальманах «100 лет дизайна»6',
-        duration: '1ч 17м'
-      },
-      {
-        name: 'Киноальманах «100 лет дизайна»7',
-        duration: '1ч 17м'
-      },
-      {
-        name: 'Киноальманах «100 лет дизайна»8',
-        duration: '1ч 17м'
-      },
-      {
-        name: 'Киноальманах «100 лет дизайна»9',
-        duration: '1ч 17м'
-      },
-    ]);
+    moviesApi.getMovies()
+      .then((movies) => {
+        console.log(movies);
+        setCardList(movies);
+        console.log(renderedCardList);
+      })
+      .then(() => {
+        window.addEventListener('resize', (e) => {
+          checkCountOfCards();
+        })
 
-    window.addEventListener('resize', (e) => {
-      checkCountOfCards();
-    })
-
-    checkCountOfCards();
-    // setRenderedCardList([]);
-    renderCards(countCardsOfWidth, renderedCardList);
+        checkCountOfCards();
+        renderCards(countCardsOfWidth, renderedCardList);
+      })
     // eslint-disable-next-line
   }, []);
 
@@ -116,8 +85,8 @@ function MoviesCardList(props) {
       {!props.isSearching &&
         <div className="card-list__container">
           {
-            renderedCardList.map((card, i) => {
-              return <MoviesCard key={i} card={card} />
+            renderedCardList.map((card) => {
+              return <MoviesCard key={card.id} card={card} />
             })
           }
         </div>

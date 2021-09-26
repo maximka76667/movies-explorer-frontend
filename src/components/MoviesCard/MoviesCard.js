@@ -9,14 +9,21 @@ function MoviesCard(props) {
     setIsMovieSaved(!isMovieSaved);
   }
 
+  function formatDuration(duration) {
+    const hours = (duration - (duration % 60)) / 60;
+    const minutes = duration - hours * 60;
+
+    return `${hours ? hours + 'ч' : ''} ${minutes ? minutes + 'м' : ''}`;
+  }
+
   return (
     <div className={`card ${isMovieSaved ? "card_saved" : ''}`}>
-      <a className="card__poster" href="yandex.ru">
-        <img className={`card__poster-img`} src='https://api.nomoreparties.co/uploads/blur_a43fcf463d.jpeg' alt={props.card.name} href="yandex.ru" />
+      <a className="card__poster" href={props.card.trailerLink}>
+        <img className="card__poster-img" src={`https://api.nomoreparties.co${props.card.image.url}`} alt={props.card.nameEN} />
       </a>
       <div className="card__info">
-        <h2 className="card__name">{props.card.name}</h2>
-        <p className="card__duration">{props.card.duration}</p>
+        <h2 className="card__name">{props.card.nameRU}</h2>
+        <p className="card__duration">{formatDuration(props.card.duration)}</p>
       </div>
       <button className="card__save-button" onClick={handleSaveImage}>{!isMovieSaved && "Сохранить"}</button>
     </div>
