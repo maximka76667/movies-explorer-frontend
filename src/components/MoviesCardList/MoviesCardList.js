@@ -1,14 +1,13 @@
 import React from 'react';
 import { useLocation } from 'react-router';
+import moviesApi from '../../utils/MoviesApi';
 import More from '../More/More';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Preloader from '../Preloader/Preloader';
 import './MoviesCardList.css';
-import moviesApi from '../../utils/MoviesApi';
 
 function MoviesCardList(props) {
 
-  const [cardList, setCardList] = React.useState([]);
   const [renderedCardList, setRenderedCardList] = React.useState([]);
   const [isAllCardsRendered, setIsAllCardsRendered] = React.useState(false);
   const [countCardsOfWidth, setCountCardsOfWidth] = React.useState(0);
@@ -18,14 +17,14 @@ function MoviesCardList(props) {
   const renderCards = (cardsCount, renderedCards) => {
     const cardsForRender = [];
 
-    const countCardsForRender = location.pathname === "/saved-movies" ? cardList.length : cardsCount;
+    const countCardsForRender = location.pathname === "/saved-movies" ? props.cardList?.length : cardsCount;
 
     for (let i = 0; i < countCardsForRender; i++) {
       const newCardIndex = i + renderedCards.length
-      const newCard = cardList[newCardIndex];
+      const newCard = props.cardList[newCardIndex];
 
-      if (newCardIndex >= cardList.length - 1) {
-        if (newCardIndex === cardList.length - 1) {
+      if (newCardIndex >= props.cardList.length - 1) {
+        if (newCardIndex === props.cardList.length - 1) {
           cardsForRender.push(newCard);
         }
         setIsAllCardsRendered(true);
@@ -54,30 +53,38 @@ function MoviesCardList(props) {
     }
   }
 
-  React.useEffect(() => {
-    moviesApi.getMovies()
-      .then((movies) => {
-        console.log(movies);
-        setCardList(movies);
-        console.log(renderedCardList);
-      })
-      .then(() => {
-        window.addEventListener('resize', (e) => {
-          checkCountOfCards();
-        })
+  function clearCardList() {
+    setIsAllCardsRendered(false);
+    setRenderedCardList([]);
+  }
 
-        checkCountOfCards();
-        renderCards(countCardsOfWidth, renderedCardList);
-      })
+  React.useEffect(() => {
+    window.addEventListener('resize', (e) => {
+      checkCountOfCards();
+    })
+
+    checkCountOfCards();
+    renderCards(countCardsOfWidth, renderedCardList);
+
+    if (location.pathname === '/saved-movies') {
+      moviesApi.getMovies()
+        .then((movies) => props.handleCardListChange(movies))
+        .catch((err) => console.log(err))
+    }
     // eslint-disable-next-line
   }, []);
 
   React.useEffect(() => {
-    setIsAllCardsRendered(false);
-    setRenderedCardList([]);
+    clearCardList();
     renderCards(countCardsOfWidth, []);
     // eslint-disable-next-line
   }, [countCardsOfWidth]);
+
+  React.useEffect(() => {
+    clearCardList();
+    renderCards(countCardsOfWidth, []);
+    // eslint-disable-next-line
+  }, [props.cardList])
 
   return (
     <div className="card-list">
