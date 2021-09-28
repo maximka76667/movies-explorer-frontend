@@ -10,12 +10,15 @@ function SavedMovies(props) {
   const [cardList, setCardList] = React.useState([]);
   const [isSearching, setIsSearching] = React.useState(false);
 
-  function search(e) {
-    e.preventDefault();
+  function search(searchValue) {
     setIsSearching(true);
     moviesApi.getMovies()
-      .then(movies => setCardList(movies))
-      .catch(console.log)
+      .then(movies => {
+        const regExp = new RegExp(searchValue.toLowerCase());
+        const filteredMovies = movies.filter((m) => regExp.test(m.nameRU.toLowerCase()))
+        setCardList(filteredMovies);
+      })
+      .catch((err) => console.log(err))
       .finally(() => setIsSearching(false))
   }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router';
 import moviesApi from '../../utils/MoviesApi';
+import CardsNotFound from '../CardsNotFound/CardsNotFound';
 import More from '../More/More';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Preloader from '../Preloader/Preloader';
@@ -86,10 +87,17 @@ function MoviesCardList(props) {
     // eslint-disable-next-line
   }, [props.cardList])
 
+  React.useEffect(() => {
+    if (props.isNotFound) {
+      setIsAllCardsRendered(true);
+    }
+  }, [props.isNotFound])
+
   return (
     <div className="card-list">
       {props.isSearching && <Preloader />}
-      {!props.isSearching &&
+      {!props.isSearching && props.isNotFound && <CardsNotFound />}
+      {!props.isSearching && !props.isNotFound &&
         <div className="card-list__container">
           {
             renderedCardList.map((card) => {

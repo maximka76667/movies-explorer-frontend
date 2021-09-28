@@ -8,13 +8,20 @@ import moviesApi from "../../utils/MoviesApi";
 function Movies(props) {
 
   const [isSearching, setIsSearching] = React.useState(false);
+  const [isNotFound, setIsNotFound] = React.useState(false);
   const [cardList, setCardList] = React.useState([]);
 
-  function search(e) {
-    e.preventDefault();
+  function search(searchValue) {
     setIsSearching(true);
+    console.log(searchValue);
     moviesApi.getMovies()
-      .then(movies => setCardList(movies))
+      .then(movies => {
+        const regExp = new RegExp(searchValue.toLowerCase());
+        const filteredMovies = movies.filter((m) => regExp.test(m.nameRU.toLowerCase()))
+        if (filteredMovies.length === 0) return setIsNotFound(true);
+        setIsNotFound(false);
+        setCardList(filteredMovies);
+      })
       .catch(console.log)
       .finally(() => setIsSearching(false))
   }
@@ -24,7 +31,7 @@ function Movies(props) {
       <Header />
       <main className="movies">
         <SearchForm onSubmit={search} />
-        <MoviesCardList isSearching={isSearching} cardList={cardList} />
+        <MoviesCardList isSearching={isSearching} isNotFound={isNotFound} cardList={cardList} />
       </main>
       <Footer />
     </>
