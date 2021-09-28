@@ -1,0 +1,7 @@
+.cards-not-found {
+  display: flex;
+  justify-content: center;
+}
+
+.cards-not-found__text {
+}

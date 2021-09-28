@@ -98,15 +98,17 @@ function MoviesCardList(props) {
       {props.isSearching && <Preloader />}
       {!props.isSearching && props.isNotFound && <CardsNotFound />}
       {!props.isSearching && !props.isNotFound &&
-        <div className="card-list__container">
-          {
-            renderedCardList.map((card) => {
-              return <MoviesCard key={card.id} card={card} />
-            })
-          }
-        </div>
+        <>
+          <div className="card-list__container">
+            {
+              renderedCardList.map((card) => {
+                return <MoviesCard key={card.id} card={card} />
+              })
+            }
+          </div>
+          <More renderCards={renderCards} isAllCardsRendered={isAllCardsRendered} countCardsOfWidth={countCardsOfWidth} renderedCardList={renderedCardList} />
+        </>
       }
-      {!props.isSearching && <More renderCards={renderCards} isAllCardsRendered={isAllCardsRendered} countCardsOfWidth={countCardsOfWidth} renderedCardList={renderedCardList} />}
     </div>
   )
 }

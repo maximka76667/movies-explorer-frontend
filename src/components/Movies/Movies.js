@@ -13,7 +13,6 @@ function Movies(props) {
 
   function search(searchValue) {
     setIsSearching(true);
-    console.log(searchValue);
     moviesApi.getMovies()
       .then(movies => {
         const regExp = new RegExp(searchValue.toLowerCase());
@@ -22,7 +21,7 @@ function Movies(props) {
         setIsNotFound(false);
         setCardList(filteredMovies);
       })
-      .catch(console.log)
+      .catch((err) => console.log(err))
       .finally(() => setIsSearching(false))
   }
 
