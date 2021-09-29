@@ -5,6 +5,11 @@ import './SearchForm.css';
 function SearchForm(props) {
 
   const [searchValue, setSearchValue] = React.useState('');
+  const [isShort, setIsShort] = React.useState(false);
+
+  function changeMoviesType() {
+    setIsShort(!isShort);
+  }
 
   function handleSearchValueChange(e) {
     setSearchValue(e.target.value);
@@ -13,14 +18,14 @@ function SearchForm(props) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    props.onSubmit(searchValue);
+    props.onSubmit(searchValue, isShort);
   }
 
   return (
     <form className="search-form" onSubmit={handleSubmit}>
       <input className="search-form__input" placeholder="Фильм" name="searchValue" id="searchValue" value={searchValue} required onChange={handleSearchValueChange} />
       <button className="search-form__submit-button" type="submit">Найти</button>
-      <FilterCheckbox />
+      <FilterCheckbox isShort={isShort} changeMoviesType={changeMoviesType} />
       <hr className="search-form__line" />
     </form>
   )

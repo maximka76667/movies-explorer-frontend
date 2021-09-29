@@ -118,6 +118,7 @@
   background: url(../../images/burger-menu-icon.svg) 50% no-repeat;
   background-size: cover;
   display: none;
+  cursor: pointer;
 }
 
 @media (max-width: 800px) {
@@ -178,6 +179,7 @@
     right: 29px;
     background: url(../../images/close-icon.svg) 50% 50% no-repeat;
     background-size: cover;
+    cursor: pointer;
   }
 
   .nav_with-menu .nav__link {
