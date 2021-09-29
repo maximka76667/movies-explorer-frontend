@@ -12,6 +12,7 @@ class Api {
   getMovies() {
     return fetch(this._baseUrl)
       .then(this._checkResponse)
+      .then((movies) => console.log(movies))
   }
 }
 
