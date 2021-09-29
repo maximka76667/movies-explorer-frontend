@@ -15,9 +15,12 @@ function Movies(props) {
     setIsSearching(true);
     moviesApi.getMovies()
       .then(movies => {
+        console.log(movies);
         const regExp = new RegExp(searchValue.toLowerCase());
-        const filteredMovies = movies.filter((m) => regExp.test(m.nameRU.toLowerCase())).filter((m) => isShort ? m.duration < 60 : m.duration > 60)
-        if (filteredMovies.length === 0) return setIsNotFound(true);
+        const filteredMovies = movies
+          .filter((movie) => regExp.test(movie.nameRU.toLowerCase()))
+          .filter((m) => isShort ? m.duration <= 60 : m.duration > 60)
+        if (filteredMovies?.length === 0) return setIsNotFound(true);
         setIsNotFound(false);
         setCardList(filteredMovies);
       })
