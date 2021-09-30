@@ -134,16 +134,16 @@ function App(props) {
             <Login onLogin={handleLogin} />
           </Route>
           <Route path="/" exact>
-            <Main />
+            <Main loggedIn={loggedIn} />
           </Route>
           <Route path="/profile" exact>
-            <Profile onLogout={handleLogout} />
+            <Profile loggedIn={loggedIn} onLogout={handleLogout} />
           </Route>
           <Route path="/movies" exact>
-            <Movies onSearch={handleSearch} />
+            <Movies loggedIn={loggedIn} onSearch={handleSearch} />
           </Route>
           <Route path="/saved-movies" exact>
-            <SavedMovies onSearch={handleSearch} />
+            <SavedMovies loggedIn={loggedIn} onSearch={handleSearch} />
           </Route>
           <Route path="/">
             <NotFound />

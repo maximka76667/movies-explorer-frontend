@@ -5,6 +5,11 @@
   z-index: 1;
   padding: 18px 70px;
   position: relative;
+  background-color: #073042;
+}
+
+.header_logged-in {
+  background-color: #fff;
 }
 
 @media (max-width: 800px) {

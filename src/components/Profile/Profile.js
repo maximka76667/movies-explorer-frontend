@@ -26,7 +26,7 @@ function Profile(props) {
 
   return (
     <>
-      <Header />
+      <Header loggedIn={props.loggedIn} />
       <div className="profile">
         <h1 className="profile__greeting">Привет, Максим</h1>
         <div className="profile__content">

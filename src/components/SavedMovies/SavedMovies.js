@@ -11,7 +11,7 @@ function SavedMovies(props) {
 
   return (
     <>
-      <Header />
+      <Header loggedIn={props.loggedIn} />
       <main className="saved-movies">
         <SearchForm onSubmit={props.handleSearch} />
         <MoviesCardList isSearching={props.isSearching} cardList={props.cardList} isNotFound={props.isNotFound} />

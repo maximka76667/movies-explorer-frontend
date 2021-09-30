@@ -9,7 +9,7 @@ import Footer from '../Footer/Footer';
 function Main(props) {
   return (
     <>
-      <Hero />
+      <Hero loggedIn={props.loggedIn} />
       <main className="main">
         <AboutProject />
         <Techs />

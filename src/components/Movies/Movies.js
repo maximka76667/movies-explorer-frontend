@@ -7,7 +7,7 @@ import Footer from '../Footer/Footer';
 function Movies(props) {
   return (
     <>
-      <Header />
+      <Header loggedIn={props.loggedIn} />
       <main className="movies">
         <SearchForm onSubmit={props.handleSearch} />
         <MoviesCardList isSearching={props.isSearching} isNotFound={props.isNotFound} cardList={props.cardList} />

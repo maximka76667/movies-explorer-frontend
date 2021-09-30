@@ -30,9 +30,9 @@ function Header(props) {
   // }, [])
 
   return (
-    <header className="header">
+    <header className={`header ${props.loggedIn ? "header_logged-in" : ''}`}>
       <Logo />
-      <Navigation isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+      <Navigation loggedIn={props.loggedIn} isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
     </header>
   )
 }
