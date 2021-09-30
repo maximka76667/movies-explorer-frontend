@@ -40,7 +40,7 @@ class Api {
   }
 
   saveMovie(data) {
-    return fetch(`${this._baseUrl}/cards`, {
+    return fetch(`${this._baseUrl}/movies`, {
       method: 'POST',
       headers: {
         authorization: this._token,
@@ -52,7 +52,7 @@ class Api {
   }
 
   unsaveMovie(movieId) {
-    return fetch(`${this._baseUrl}/cards/${movieId}`, {
+    return fetch(`${this._baseUrl}/movies/${movieId}`, {
       method: 'DELETE',
       headers: {
         authorization: this._token,
@@ -61,15 +61,15 @@ class Api {
       .then(this._checkResponse);
   }
 
-  changeMovieSavedStatus(movieId, isSaved) {
-    return fetch(`${this._baseUrl}/cards/${movieId}/likes`, {
-      method: isSaved ? 'DELETE' : 'PUT',
-      headers: {
-        authorization: this._token,
-      },
-    })
-      .then(this._checkResponse);
-  }
+  // changeMovieSavedStatus(movieId, isSaved) {
+  //   return fetch(`${this._baseUrl}/cards/${movieId}/likes`, {
+  //     method: isSaved ? 'DELETE' : 'PUT',
+  //     headers: {
+  //       authorization: this._token,
+  //     },
+  //   })
+  //     .then(this._checkResponse);
+  // }
 
   changeToken(token) {
     this._token = `Bearer ${token}`

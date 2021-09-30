@@ -2,7 +2,6 @@ import React from 'react';
 import './App.css';
 import Main from '../Main/Main'
 import { Route, withRouter, Switch } from 'react-router-dom'
-import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
@@ -11,12 +10,15 @@ import NotFound from '../NotFound/NotFound';
 import CurrentUserContext from '../../contexts/CurrentUserContext'
 import auth from '../../utils/Auth'
 import mainApi from '../../utils/MainApi';
+import moviesApi from '../../utils/MoviesApi'
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App(props) {
   // Movies
   const [cardList, setCardList] = React.useState([]);
   const [isNotFound, setIsNotFound] = React.useState(false);
   const [isSearching, setIsSearching] = React.useState(false);
+  const [isResult, setIsResult] = React.useState(false);
 
   // Auth
   const [currentUser, setCurrentUser] = React.useState({});
@@ -27,9 +29,10 @@ function App(props) {
     //setIsRemovePopupOpen(false);
   }
 
-  function handleSearch(searchValue, isShort) {
+  function handleSearchAllMovies(searchValue, isShort) {
     setIsSearching(true);
-    mainApi.getSavedMovies()
+    setIsResult(false);
+    moviesApi.getMovies()
       .then(movies => {
         console.log(movies);
         const regExp = new RegExp(searchValue.toLowerCase());
@@ -38,6 +41,25 @@ function App(props) {
           .filter((m) => isShort ? m.duration <= 60 : m.duration > 60)
         if (filteredMovies?.length === 0) return setIsNotFound(true);
         setIsNotFound(false);
+        setIsResult(true);
+        setCardList(filteredMovies);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setIsSearching(false))
+  }
+
+  function handleSearchMyMovies(searchValue, isShort) {
+    setIsSearching(true);
+    setIsResult(false);
+    mainApi.getSavedMovies()
+      .then(movies => {
+        const regExp = new RegExp(searchValue.toLowerCase());
+        const filteredMovies = movies
+          .filter((movie) => regExp.test(movie.nameRU.toLowerCase()))
+          .filter((m) => isShort ? m.duration <= 60 : m.duration > 60)
+        if (filteredMovies?.length === 0) return setIsNotFound(true);
+        setIsNotFound(false);
+        setIsResult(true);
         setCardList(filteredMovies);
       })
       .catch((err) => console.log(err))
@@ -51,7 +73,7 @@ function App(props) {
         setCurrentUser(res.user);
         closeAllPopups();
       })
-      .catch((err) => console.log(err))
+      .catch((err) => handleError(err))
       .finally(() => {
         //setIsLoading(false);
       })
@@ -59,16 +81,18 @@ function App(props) {
 
   function handleSaveMovie(data) {
     //setIsLoading(true);
-    mainApi.addMovie(data)
-      .then(() => {
-        closeAllPopups();
-      })
-      .catch((err) => console.log(err))
+    mainApi.saveMovie(data)
+      .catch((err) => handleError(err))
       .finally(() => { }/*setIsLoading(false)*/)
   }
 
-  function handleLogin({ login, password }) {
-    auth.login({ login, password })
+  function handleUnsaveMovie(data) {
+    mainApi.unsaveMovie(data._id)
+      .catch(err => handleError(err))
+  }
+
+  function handleLogin({ email, password }) {
+    auth.login({ email, password })
       .then((data) => {
         if (data.token) handleAuth(data.token);
       })
@@ -84,18 +108,25 @@ function App(props) {
         // setIsInfoTooltipOpen(true);
         mainApi.changeToken(token);
         setCurrentUser(res.user);
-        props.history.push('/');
+        props.history.push('/movies');
       })
-    //.catch(err => handleError(err))
+      .catch(err => handleError(err))
   }
 
   function handleLogout() {
-    setLoggedIn(false);
-    localStorage.removeItem('token');
+    auth.signout()
+      .then(() => {
+        setLoggedIn(false);
+        localStorage.removeItem('token');
+        mainApi.changeToken('');
+        setCurrentUser(null);
+        props.history.push('/signin');
+      })
+      .catch((err) => handleError(err))
   }
 
-  function handleRegister({ email, password }) {
-    auth.register({ email, password })
+  function handleRegister({ name, email, password }) {
+    auth.register({ name, email, password })
       .then(() => {
         //setLoginResult(true);
         //setIsInfoTooltipOpen(true);
@@ -105,8 +136,6 @@ function App(props) {
   }
 
   function handleError(error) {
-    //setLoginResult(false);
-    //setIsInfoTooltipOpen(true);
     console.log(error);
   }
 
@@ -136,21 +165,43 @@ function App(props) {
           <Route path="/" exact>
             <Main loggedIn={loggedIn} />
           </Route>
-          <Route path="/profile" exact>
-            <Profile loggedIn={loggedIn} onLogout={handleLogout} />
-          </Route>
-          <Route path="/movies" exact>
-            <Movies loggedIn={loggedIn} onSearch={handleSearch} />
-          </Route>
-          <Route path="/saved-movies" exact>
-            <SavedMovies loggedIn={loggedIn} onSearch={handleSearch} />
-          </Route>
-          <Route path="/">
-            <NotFound />
-          </Route>
+          <ProtectedRoute
+            path="/profile"
+            exact
+            component={Profile}
+            loggedIn={loggedIn}
+            onUserUpdate={handleUpdateUser}
+            onLogout={handleLogout}
+          />
+          <ProtectedRoute
+            path="/movies"
+            exact
+            loggedIn={loggedIn}
+            isResult={isResult}
+            isNotFound={isNotFound}
+            isSearching={isSearching}
+            onSearch={handleSearchAllMovies}
+            onSaveMovie={handleSaveMovie}
+            onUnsaveMovie={handleUnsaveMovie}
+            cardList={cardList}
+          />
+          <ProtectedRoute
+            path="/saved-movies"
+            exact
+            component={SavedMovies}
+            loggedIn={loggedIn}
+            isResult={isResult}
+            isNotFound={isNotFound}
+            isSearching={isSearching}
+            onSearch={handleSearchMyMovies}
+            onSaveMovie={handleSaveMovie}
+            onUnsaveMovie={handleUnsaveMovie}
+            cardList={cardList}
+          />
+          <ProtectedRoute path="/" component={NotFound} />
         </Switch>
       </div>
-    </CurrentUserContext.Provider>
+    </CurrentUserContext.Provider >
   );
 }
 

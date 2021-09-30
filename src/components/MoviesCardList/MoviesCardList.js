@@ -1,6 +1,5 @@
 import React from 'react';
 import { useLocation } from 'react-router';
-import moviesApi from '../../utils/MoviesApi';
 import CardsNotFound from '../CardsNotFound/CardsNotFound';
 import More from '../More/More';
 import MoviesCard from '../MoviesCard/MoviesCard';
@@ -21,11 +20,11 @@ function MoviesCardList(props) {
     const countCardsForRender = location.pathname === "/saved-movies" ? props.cardList?.length : cardsCount;
 
     for (let i = 0; i < countCardsForRender; i++) {
-      const newCardIndex = i + renderedCards.length
-      const newCard = props.cardList[newCardIndex];
+      const newCardIndex = i + renderedCards.length;
+      const newCard = props?.cardList?.[newCardIndex] || 0;
 
-      if (newCardIndex >= props.cardList.length - 1) {
-        if (newCardIndex === props.cardList.length - 1) {
+      if (newCardIndex >= props?.cardList?.length - 1) {
+        if (newCardIndex === props?.cardList?.length - 1) {
           cardsForRender.push(newCard);
         }
         setIsAllCardsRendered(true);
@@ -77,7 +76,7 @@ function MoviesCardList(props) {
 
   React.useEffect(() => {
     clearCardList();
-    renderCards(countCardsOfWidth, []);
+    //renderCards(countCardsOfWidth, []);
     // eslint-disable-next-line
   }, [countCardsOfWidth]);
 
@@ -93,11 +92,17 @@ function MoviesCardList(props) {
     }
   }, [props.isNotFound])
 
+  React.useEffect(() => {
+    if (props.cardList.length === 0) {
+      setIsAllCardsRendered(true);
+    }
+  }, [props.cardList])
+
   return (
     <div className="card-list">
       {props.isSearching && <Preloader />}
       {!props.isSearching && props.isNotFound && <CardsNotFound />}
-      {!props.isSearching && !props.isNotFound &&
+      {!props.isSearching && !props.isNotFound && props.isResult &&
         <>
           <div className="card-list__container">
             {

@@ -9,8 +9,8 @@ function Movies(props) {
     <>
       <Header loggedIn={props.loggedIn} />
       <main className="movies">
-        <SearchForm onSubmit={props.handleSearch} />
-        <MoviesCardList isSearching={props.isSearching} isNotFound={props.isNotFound} cardList={props.cardList} />
+        <SearchForm onSubmit={props.onSearch} />
+        <MoviesCardList isSearching={props.isSearching} isResult={props.isResult} isNotFound={props.isNotFound} cardList={props.cardList} />
       </main>
       <Footer />
     </>

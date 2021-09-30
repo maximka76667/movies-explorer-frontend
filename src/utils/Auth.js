@@ -30,11 +30,31 @@ class Auth {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        "email": data.login,
+        "email": data.email,
         "password": data.password,
       })
     })
       .then(this._checkResponse)
+  }
+
+  signout() {
+    return fetch(`${this._baseUrl}/signout`, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+  }
+
+  getEmail(token) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
+    })
+      .then(this._checkResponse);
   }
 }
 
