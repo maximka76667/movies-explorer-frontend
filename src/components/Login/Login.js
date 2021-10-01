@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useInputChange } from '../../utils/useInputChange';
 import Logo from '../Logo/Logo';
 import './Login.css';
 

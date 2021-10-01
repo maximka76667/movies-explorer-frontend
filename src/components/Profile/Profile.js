@@ -85,8 +85,8 @@ function Profile(props) {
       <Header loggedIn={props.loggedIn} />
       <div className="profile">
         <h1 className="profile__greeting">Привет, Максим</h1>
-        <div className="profile__content">
-          <form className="profile__info" onSubmit={handleSubmit}>
+        <form className="profile__content" onSubmit={handleSubmit}>
+          <div className="profile__info">
             <div className="profile__field">
               <h2 className="profile__field-name">Имя</h2>
               <input className={inputNameClassName} onChange={handleChangeName} value={name} disabled={!isEdit} />
@@ -96,10 +96,10 @@ function Profile(props) {
               <h2 className="profile__field-name">E-mail</h2>
               <input className={inputEmailClassName} onChange={handleChangeEmail} value={email} disabled={!isEdit} />
             </div>
-          </form>
-          <button className="profile__edit-button" onClick={changeEditMode}>{isEdit ? "Сохранить" : "Редактировать"}</button>
+          </div>
+          <button className="profile__edit-button" onClick={isEdit ? handleSubmit : changeEditMode} disabled={isEdit && !isSubmitValid}>{isEdit ? "Сохранить" : "Редактировать"}</button>
           <button className="profile__exit-button" onClick={props.onLogout}>Выйти из аккаунта</button>
-        </div>
+        </form>
       </div>
     </>
   )
