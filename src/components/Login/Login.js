@@ -75,9 +75,11 @@ function Login(props) {
   React.useEffect(() => {
     if (isEmailError || isPasswordError) return setIsSubmitValid(false);
     return setIsSubmitValid(true);
-  }, [isEmailError, isPasswordError])
+  }, [isEmailError, isPasswordError, email, password])
 
   React.useEffect(() => {
+    setIsEmailError(true);
+    setIsPasswordError(true);
     setIsSubmitValid(false);
   }, [])
 

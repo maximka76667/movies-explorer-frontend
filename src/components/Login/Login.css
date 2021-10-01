@@ -68,6 +68,7 @@
   color: #fff;
   transition: all 0.3s;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 .login__submit-button:hover {
@@ -78,6 +79,7 @@
   background-color: #fff;
   border: 1px solid grey;
   color: #000;
+  cursor: auto;
 }
 
 .login__register {
