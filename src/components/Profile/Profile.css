@@ -59,7 +59,12 @@
 }
 
 .profile__field-value_edit {
-  border-bottom: 1px solid blue;
+  border-bottom: 1px solid #3456f3;
+}
+
+.profile__field-value_error {
+  border-bottom: 1px solid red;
+  color: red;
 }
 
 .profile__edit-button {

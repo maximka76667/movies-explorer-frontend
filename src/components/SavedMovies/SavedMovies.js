@@ -5,10 +5,6 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
 function SavedMovies(props) {
-  // function handleCardListChange(movies) {
-  //   setCardList(movies);
-  // }
-
   return (
     <>
       <Header loggedIn={props.loggedIn} />

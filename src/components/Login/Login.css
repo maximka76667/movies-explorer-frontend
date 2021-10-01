@@ -17,11 +17,6 @@
 .login__form-field {
   display: flex;
   flex-direction: column;
-  margin-bottom: 40px;
-}
-
-.login__form-field:not(:last-of-type) {
-  margin-bottom: 24px;
 }
 
 .login__form-label {
@@ -47,20 +42,41 @@
   border-bottom: 1px solid #3456f3;
 }
 
+.login__form-input_error {
+  color: #ff3055;
+}
+
+.login__form-error {
+  min-height: 12px;
+  margin: 6px 0;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 12px;
+  color: #ff3055;
+}
+
 .login__submit-button {
   width: 100%;
   margin: 70px 0 16px;
   background-color: #3456f3;
+  border: 1px solid #3456f3;
   border-radius: 3px;
   padding: 14px;
   border: 0;
   outline: 0;
   color: #fff;
   transition: all 0.3s;
+  box-sizing: border-box;
 }
 
 .login__submit-button:hover {
   background-color: #2be080;
+}
+
+.login__submit-button:disabled {
+  background-color: #fff;
+  border: 1px solid grey;
+  color: #000;
 }
 
 .login__register {

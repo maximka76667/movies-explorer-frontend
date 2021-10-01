@@ -12,16 +12,72 @@ function Profile(props) {
 
   const [isEdit, setIsEdit] = React.useState(false);
 
+  // Validation Constants
+  const [isNameError, setIsNameError] = React.useState(false);
+  const [isEmailError, setIsEmailError] = React.useState(false);
+  const [isSubmitValid, setIsSubmitValid] = React.useState(false);
+
   function handleChangeName(e) {
     if (isEdit) {
       setName(e.target.value);
+      handleValidation(e);
     }
   }
 
   function handleChangeEmail(e) {
     if (isEdit) {
       setEmail(e.target.value);
+      handleValidation(e);
     }
+  }
+
+  const inputNameClassName = (
+    `profile__field-value ${isEdit ? "profile__field-value_edit" : ''} ${isNameError ? "profile__field-value_error" : ""}`
+  );
+
+  const inputEmailClassName = (
+    `profile__field-value ${isEdit ? "profile__field-value_edit" : ''} ${isEmailError ? "profile__field-value_error" : ""}`
+  )
+
+  function handleValidation(e) {
+    const inputElement = e.target;
+
+    switch (inputElement.name) {
+      case 'name': {
+        if (!inputElement.validity.valid) {
+          setIsNameError(true);
+          setIsSubmitValid(false);
+          return;
+        }
+        setIsNameError(false);
+        setIsSubmitValid(true);
+        break;
+      }
+      case 'email': {
+        if (!inputElement.validity.valid) {
+          setIsEmailError(true);
+          setIsSubmitValid(false);
+          return;
+        }
+        setIsEmailError(false);
+        setIsSubmitValid(true);
+        break;
+      }
+      default: { }
+    }
+  }
+
+  function changeEditMode() {
+    setIsEdit(!isEdit)
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    props.onUpdateUser({
+      name,
+      email,
+    });
   }
 
   return (
@@ -30,18 +86,18 @@ function Profile(props) {
       <div className="profile">
         <h1 className="profile__greeting">Привет, Максим</h1>
         <div className="profile__content">
-          <div className="profile__info">
+          <form className="profile__info" onSubmit={handleSubmit}>
             <div className="profile__field">
               <h2 className="profile__field-name">Имя</h2>
-              <input className={`profile__field-value ${isEdit ? "profile__field-value_edit" : ''}`} onChange={handleChangeName} value={name} disabled={isEdit ? false : true} />
+              <input className={inputNameClassName} onChange={handleChangeName} value={name} disabled={isEdit ? false : true} />
             </div>
             <hr className="profile__line" />
             <div className="profile__field">
               <h2 className="profile__field-name">E-mail</h2>
-              <input className={`profile__field-value ${isEdit ? "profile__field-value_edit" : ''}`} onChange={handleChangeEmail} value={email} disabled={isEdit ? false : true} />
+              <input className={inputEmailClassName} onChange={handleChangeEmail} value={email} disabled={isEdit ? false : true} />
             </div>
-          </div>
-          <button className="profile__edit-button" onClick={() => setIsEdit(!isEdit)}>{isEdit ? "Сохранить" : "Редактировать"}</button>
+          </form>
+          <button className="profile__edit-button" onClick={changeEditMode}>{isEdit ? "Сохранить" : "Редактировать"}</button>
           <button className="profile__exit-button" onClick={props.onLogout}>Выйти из аккаунта</button>
         </div>
       </div>
