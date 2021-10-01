@@ -66,11 +66,6 @@ function MoviesCardList(props) {
     checkCountOfCards();
     renderCards(countCardsOfWidth, renderedCardList);
 
-    // if (location.pathname === '/saved-movies') {
-    //   moviesApi.getMovies()
-    //     .then((movies) => props.handleCardListChange(movies))
-    //     .catch((err) => console.log(err))
-    // }
     // eslint-disable-next-line
   }, []);
 
@@ -107,7 +102,7 @@ function MoviesCardList(props) {
           <div className="card-list__container">
             {
               renderedCardList.map((card) => {
-                return <MoviesCard key={card.id} card={card} />
+                return <MoviesCard key={card.id} card={card} onSaveMovie={props.onSaveMovie} onUnsaveMovie={props.onUnsaveMovie} />
               })
             }
           </div>

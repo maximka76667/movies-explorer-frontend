@@ -10,7 +10,12 @@ class Api {
   }
 
   getSavedMovies() {
-    return fetch(`${this._baseUrl}/movies`)
+    return fetch(`${this._baseUrl}/movies`, {
+      headers: {
+        authorization: this._token,
+        'Content-Type': 'application/json',
+      }
+    })
       .then(this._checkResponse)
   }
 
@@ -33,7 +38,7 @@ class Api {
       },
       body: JSON.stringify({
         name: data.name,
-        about: data.about,
+        email: data.email,
       }),
     })
       .then(this._checkResponse);
@@ -46,7 +51,19 @@ class Api {
         authorization: this._token,
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        country: data.country,
+        director: data.director,
+        duration: data.duration,
+        year: data.year,
+        description: data.description,
+        image: "https://api.nomoreparties.co" + data.image.url,
+        trailer: data.trailerLink,
+        thumbnail: data.trailerLink,
+        movieId: data.id,
+        nameRU: data.nameRU,
+        nameEN: data.nameEN,
+      }),
     })
       .then(this._checkResponse);
   }

@@ -10,7 +10,7 @@ function Movies(props) {
       <Header loggedIn={props.loggedIn} />
       <main className="movies">
         <SearchForm onSubmit={props.onSearch} />
-        <MoviesCardList isSearching={props.isSearching} isResult={props.isResult} isNotFound={props.isNotFound} cardList={props.cardList} />
+        <MoviesCardList isSearching={props.isSearching} isResult={props.isResult} isNotFound={props.isNotFound} cardList={props.cardList} onSaveMovie={props.onSaveMovie} onUnsaveMovie={props.onUnsaveMovie} />
       </main>
       <Footer />
     </>

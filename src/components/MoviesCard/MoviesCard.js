@@ -6,7 +6,14 @@ function MoviesCard(props) {
   const [isMovieSaved, setIsMovieSaved] = React.useState(false);
 
   function handleSaveImage() {
-    setIsMovieSaved(!isMovieSaved);
+    if (isMovieSaved) {
+      props.onUnsaveMovie(props.card);
+      setIsMovieSaved(false);
+    }
+    if (!isMovieSaved) {
+      props.onSaveMovie(props.card);
+      setIsMovieSaved(true);
+    }
   }
 
   function formatDuration(duration) {

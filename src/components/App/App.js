@@ -12,8 +12,13 @@ import auth from '../../utils/Auth'
 import mainApi from '../../utils/MainApi';
 import moviesApi from '../../utils/MoviesApi'
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import Movies from '../Movies/Movies';
 
 function App(props) {
+
+  // Loading
+  const [isLoading, setIsLoading] = React.useState(false);
+
   // Movies
   const [cardList, setCardList] = React.useState([]);
   const [isNotFound, setIsNotFound] = React.useState(false);
@@ -24,11 +29,15 @@ function App(props) {
   const [currentUser, setCurrentUser] = React.useState({});
   const [loggedIn, setLoggedIn] = React.useState(false);
 
+  // Profile
+  const [isEdit, setIsEdit] = React.useState(false);
+
   function closeAllPopups() {
     //setIsEditProfilePopupOpen(false);
     //setIsRemovePopupOpen(false);
   }
 
+  // Movies
   function handleSearchAllMovies(searchValue, isShort) {
     setIsSearching(true);
     setIsResult(false);
@@ -48,16 +57,20 @@ function App(props) {
       .finally(() => setIsSearching(false))
   }
 
+  // Saved Movies
   function handleSearchMyMovies(searchValue, isShort) {
     setIsSearching(true);
     setIsResult(false);
     mainApi.getSavedMovies()
-      .then(movies => {
+      .then(({ movies }) => {
+        console.log(searchValue, isShort);
+        console.log(movies);
+        if (movies.length === 0) return setIsNotFound(true);
         const regExp = new RegExp(searchValue.toLowerCase());
         const filteredMovies = movies
           .filter((movie) => regExp.test(movie.nameRU.toLowerCase()))
           .filter((m) => isShort ? m.duration <= 60 : m.duration > 60)
-        if (filteredMovies?.length === 0) return setIsNotFound(true);
+        if (filteredMovies.length === 0) return setIsNotFound(true);
         setIsNotFound(false);
         setIsResult(true);
         setCardList(filteredMovies);
@@ -66,21 +79,26 @@ function App(props) {
       .finally(() => setIsSearching(false))
   }
 
-  function handleUpdateUser(data) {
-    //setIsLoading(true);
-    mainApi.setProfileInfo(data)
-      .then((res) => {
-        setCurrentUser(res.user);
-        closeAllPopups();
-      })
-      .catch((err) => handleError(err))
-      .finally(() => {
-        //setIsLoading(false);
-      })
+  // Profile
+  function handleUpdateUser({ name, email }) {
+    if (isEdit) {
+      setIsLoading(true);
+      mainApi.setProfileInfo({ name, email })
+        .then((res) => {
+          setCurrentUser(res.user);
+          closeAllPopups();
+        })
+        .catch((err) => handleError(err))
+        .finally(() => {
+          setIsLoading(false);
+          setIsEdit(false);
+        })
+    }
   }
 
   function handleSaveMovie(data) {
     //setIsLoading(true);
+    console.log(data);
     mainApi.saveMovie(data)
       .catch((err) => handleError(err))
       .finally(() => { }/*setIsLoading(false)*/)
@@ -172,10 +190,12 @@ function App(props) {
             loggedIn={loggedIn}
             onUserUpdate={handleUpdateUser}
             onLogout={handleLogout}
+            isLoading={isLoading}
           />
           <ProtectedRoute
             path="/movies"
             exact
+            component={Movies}
             loggedIn={loggedIn}
             isResult={isResult}
             isNotFound={isNotFound}
