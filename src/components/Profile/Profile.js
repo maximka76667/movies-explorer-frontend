@@ -89,12 +89,12 @@ function Profile(props) {
           <form className="profile__info" onSubmit={handleSubmit}>
             <div className="profile__field">
               <h2 className="profile__field-name">Имя</h2>
-              <input className={inputNameClassName} onChange={handleChangeName} value={name} disabled={isEdit ? false : true} />
+              <input className={inputNameClassName} onChange={handleChangeName} value={name} disabled={!isEdit} />
             </div>
             <hr className="profile__line" />
             <div className="profile__field">
               <h2 className="profile__field-name">E-mail</h2>
-              <input className={inputEmailClassName} onChange={handleChangeEmail} value={email} disabled={isEdit ? false : true} />
+              <input className={inputEmailClassName} onChange={handleChangeEmail} value={email} disabled={!isEdit} />
             </div>
           </form>
           <button className="profile__edit-button" onClick={changeEditMode}>{isEdit ? "Сохранить" : "Редактировать"}</button>

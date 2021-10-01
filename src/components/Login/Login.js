@@ -15,25 +15,15 @@ function Login(props) {
   const [passwordError, setPasswordError] = React.useState('');
   const [isEmailError, setIsEmailError] = React.useState(false);
   const [isPasswordError, setIsPasswordError] = React.useState(false);
-  const [isEmailValid, setIsEmailValid] = React.useState(false);
-  const [isPasswordValid, setIsPasswordValid] = React.useState(false);
   const [isSubmitValid, setIsSubmitValid] = React.useState(false);
 
   // ClassNames
   const emailInputClassName = (
-    `login__form-input ${isEmailError ? 'login__form-error_error' : ''}`
+    `login__form-input ${isEmailError ? 'login__form-input_error' : ''}`
   );
 
   const passwordInputClassName = (
-    `login__form-input ${isPasswordError ? 'login__form-error_error' : ''}`
-  );
-
-  const emailErrorClassName = (
-    `login__form-error ${isEmailError ? 'login__form-error' : ''}`
-  );
-
-  const passwordErrorClassName = (
-    `login__form-error ${isPasswordError ? 'login__form-error' : ''}`
+    `login__form-input ${isPasswordError ? 'login__form-input_error' : ''}`
   );
 
   function handleSubmit(e) {
@@ -62,10 +52,9 @@ function Login(props) {
         if (!inputElement.validity.valid) {
           setIsEmailError(true);
           setEmailError(inputElement.validationMessage);
-          setIsEmailValid(false);
           return;
         }
-        setIsEmailValid(true);
+        setIsEmailError(false);
         setEmailError('');
         break;
       }
@@ -73,10 +62,8 @@ function Login(props) {
         if (!inputElement.validity.valid) {
           setIsPasswordError(true);
           setPasswordError(inputElement.validationMessage);
-          setIsPasswordValid(false);
           return;
         }
-        setIsPasswordValid(true);
         setIsPasswordError(false);
         setPasswordError('');
         break;
@@ -86,11 +73,13 @@ function Login(props) {
   }
 
   React.useEffect(() => {
-    if (isEmailValid && isPasswordValid) {
-      return setIsSubmitValid(true);
-    }
-    return setIsSubmitValid(false);
-  }, [isEmailValid, isPasswordValid])
+    if (isEmailError || isPasswordError) return setIsSubmitValid(false);
+    return setIsSubmitValid(true);
+  }, [isEmailError, isPasswordError])
+
+  React.useEffect(() => {
+    setIsSubmitValid(false);
+  }, [])
 
   return (
     <div className="login">
@@ -108,7 +97,7 @@ function Login(props) {
             <input className={passwordInputClassName} name="password" type="password" value={password} onChange={handlePasswordInputChange} required />
             <p className="login__form-error">{passwordError}</p>
           </div>
-          <button className="login__submit-button" type="submit" disabled={!isSubmitValid ? true : false}>Войти</button>
+          <button className="login__submit-button" type="submit" disabled={!isSubmitValid}>Войти</button>
         </form>
         <p className="login__register">Ещё не зарегистрированы?<Link className="login__register-link" to="/signup">Регистрация</Link></p>
       </div>
