@@ -7,7 +7,7 @@ import './MoviesCardList.css';
 
 function MoviesCardList(props) {
   const renderItem = (card) => (
-    <MoviesCard key={card.id} card={card} onSaveMovie={props.onSaveMovie} onUnsaveMovie={props.onUnsaveMovie} />
+    <MoviesCard key={card.id} card={card} onSaveMovie={props.onSaveMovie} onUnsaveMovie={props.onUnsaveMovie} savedMovies={props.savedMovies} />
   )
 
   return (

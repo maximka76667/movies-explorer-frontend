@@ -29,6 +29,7 @@ function SavedMovies(props) {
           isNotFound={props.isNotFound}
           onSaveMovie={props.onSaveMovie}
           onUnsaveMovie={props.onUnsaveMovie}
+          savedMovies={props.savedMovies}
         />
       </main>
       <Footer />

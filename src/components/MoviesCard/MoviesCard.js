@@ -1,19 +1,20 @@
 import React from 'react';
-import mainApi from '../../utils/MainApi';
 import './MoviesCard.css'
 
 function MoviesCard(props) {
 
-  const [isMovieSaved, setIsMovieSaved] = React.useState(false);
+  const [cardId, setCardId] = React.useState('');
+  const [isSaved, setIsSaved] = React.useState(props.savedMovies.find(movie => movie.movieId === props.card.id || movie.movieId === props.card.movieId));
 
-  function handleSaveImage() {
-    if (isMovieSaved) {
-      props.onUnsaveMovie(props.card);
-      setIsMovieSaved(false);
+  function handleSaveMovie() {
+    if (isSaved) {
+      console.log(props.savedMovies);
+      props.onUnsaveMovie(cardId);
+      setIsSaved(false);
     }
-    if (!isMovieSaved) {
+    if (!isSaved) {
       props.onSaveMovie(props.card);
-      setIsMovieSaved(true);
+      setIsSaved(true);
     }
   }
 
@@ -25,27 +26,25 @@ function MoviesCard(props) {
   }
 
   React.useEffect(() => {
-    mainApi.getSavedMovies()
-      .then((movies) => {
-        movies.movies.map(card => {
-          if (card._id === props.card._id) {
-            setIsMovieSaved(true);
-          }
-          return null;
-        })
-      })
+    props.savedMovies.forEach((movie) => {
+      console.log(movie.movieId, props.card);
+      if (movie.movieId === props.card.id || movie.movieId === props.card.movieId) {
+        setCardId(movie._id);
+      }
+    });
+    // eslint-disable-next-line
   }, [])
 
   return (
-    <div className={`card ${isMovieSaved ? "card_saved" : ''}`}>
+    <div className={`card ${isSaved ? "card_saved" : ''}`}>
       <a className="card__poster" href={props.card.trailerLink}>
-        <img className="card__poster-img" src={props.card.image.url || `https://api.nomoreparties.co${props.card.image}`} alt={props.card.nameEN} />
+        <img className="card__poster-img" src={props.card.image.url ? `https://api.nomoreparties.co${props.card.image.url}` : props.card.image} alt={props.card.nameEN} />
       </a>
       <div className="card__info">
         <h2 className="card__name">{props.card.nameRU}</h2>
         <p className="card__duration">{formatDuration(props.card.duration)}</p>
       </div>
-      <button className="card__save-button" onClick={handleSaveImage}>{!isMovieSaved && "Сохранить"}</button>
+      <button className="card__save-button" onClick={handleSaveMovie}>{!isSaved && "Сохранить"}</button>
     </div>
   )
 }

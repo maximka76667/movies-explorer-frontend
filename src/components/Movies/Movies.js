@@ -8,6 +8,7 @@ function Movies(props) {
 
   React.useEffect(() => {
     props.clearCardList();
+    // eslint-disable-next-line
   }, [])
 
   return (
@@ -29,6 +30,7 @@ function Movies(props) {
           cardList={props.cardList}
           onSaveMovie={props.onSaveMovie}
           onUnsaveMovie={props.onUnsaveMovie}
+          savedMovies={props.savedMovies}
         />
       </main>
       <Footer />

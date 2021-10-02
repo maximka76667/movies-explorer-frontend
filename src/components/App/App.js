@@ -13,12 +13,8 @@ import mainApi from '../../utils/MainApi';
 import moviesApi from '../../utils/MoviesApi'
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Movies from '../Movies/Movies';
-import { useLocation } from 'react-router';
 
 function App(props) {
-
-  const location = useLocation();
-
   // Auth
   const [currentUser, setCurrentUser] = React.useState({});
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -37,6 +33,9 @@ function App(props) {
   const [isNotFound, setIsNotFound] = React.useState(false);
   const [isSearching, setIsSearching] = React.useState(false);
   const [isResult, setIsResult] = React.useState(false);
+
+  // Saved Movies
+  const [savedMovies, setSavedMovies] = React.useState([]);
 
   // Profile
   const [isEdit, setIsEdit] = React.useState(false);
@@ -60,17 +59,26 @@ function App(props) {
         mainApi.changeToken(token);
         setCurrentUser(res.user);
         props.history.push('/movies');
+        mainApi.getSavedMovies()
+          .then((movies) => {
+            const filteredMovies = movies.movies.filter((movie) => {
+              console.log(movie.owner, res.user._id, res.user);
+              return movie.owner === res.user._id
+            });
+            console.log(filteredMovies);
+            setSavedMovies(filteredMovies);
+          })
       })
-      .catch(err => handleError(err))
+      .catch(err => handleError(err));
   }
 
   function handleLogout() {
     auth.signout()
       .then(() => {
         setLoggedIn(false);
-        localStorage.removeItem('token');
         mainApi.changeToken('');
         setCurrentUser(null);
+        localStorage.removeItem('token');
         props.history.push('/signin');
       })
       .catch((err) => handleError(err))
@@ -127,25 +135,24 @@ function App(props) {
 
   // Saved Movies
   function handleInitSavedMovies() {
-    setIsLoading(true);
-    mainApi.getSavedMovies()
-      .then(movies => {
-        setIsNotFound(false);
-        setIsResult(true);
-        setInitCardList(movies.movies);
-        setCardList(movies.movies);
-      })
-      .finally(setIsLoading(false))
+    setIsNotFound(false);
+    setIsResult(true);
+    setInitCardList(savedMovies);
+    setCardList(savedMovies);
   }
 
   // Movie Card
   function handleSaveMovie(data) {
+    console.log(data);
     mainApi.saveMovie(data)
+      // .then((movie) => {
+      //   setSavedMovies({ ...savedMovies, movie });
+      // })
       .catch((err) => handleError(err))
   }
 
-  function handleUnsaveMovie(data) {
-    mainApi.unsaveMovie(data._id)
+  function handleUnsaveMovie(id) {
+    mainApi.unsaveMovie(id)
       .catch(err => handleError(err))
   }
 
@@ -310,6 +317,7 @@ function App(props) {
             onSaveMovie={handleSaveMovie}
             onUnsaveMovie={handleUnsaveMovie}
             cardList={cardList}
+            savedMovies={savedMovies}
             clearCardList={clearCardList}
           />
           <ProtectedRoute
@@ -323,6 +331,7 @@ function App(props) {
             onSaveMovie={handleSaveMovie}
             onUnsaveMovie={handleUnsaveMovie}
             cardList={cardList}
+            savedMovies={savedMovies}
             initSavedMovies={handleInitSavedMovies}
             clearCardList={clearCardList}
             renderedCardList={renderedCardList}
