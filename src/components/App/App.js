@@ -91,11 +91,11 @@ function App(props) {
 
   function handleRegister({ name, email, password }) {
     auth.register({ name, email, password })
-      .then(() => {
+      .then((res) => {
         setInfoMessage('Регистрация прошла успешно.');
         setResultSuccessful(true);
         setIsInfoTooltipOpen(true);
-        props.history.push('/signin');
+        handleLogin({ email, password });
       })
       .catch((err) => handleError(err))
   }
