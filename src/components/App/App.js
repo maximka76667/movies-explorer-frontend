@@ -160,7 +160,7 @@ function App(props) {
         const newSavedMovies = savedMovies.filter((movieCard) => deletedCard.movie._id !== movieCard._id)
         setSavedMovies(newSavedMovies);
       })
-      .catch(err => handleError(err))
+      .catch(err => console.log(err))
   }
 
   function handleSearchMyMovies(searchValue, isShort) {
