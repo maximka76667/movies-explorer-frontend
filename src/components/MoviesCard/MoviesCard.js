@@ -24,6 +24,7 @@ function MoviesCard(props) {
 
   React.useEffect(() => {
     setIsSaved(props.savedMovies.find(movie => movie.movieId === props.card.id || movie.movieId === props.card.movieId));
+    // eslint-disable-next-line
   }, [props.cardList, props.savedMovies])
 
   return (
