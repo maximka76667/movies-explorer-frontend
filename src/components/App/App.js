@@ -13,6 +13,7 @@ import mainApi from '../../utils/MainApi';
 import moviesApi from '../../utils/MoviesApi'
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Movies from '../Movies/Movies';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
 
 function App(props) {
   // Auth
@@ -37,6 +38,11 @@ function App(props) {
   // Profile
   const [isEdit, setIsEdit] = React.useState(false);
 
+  // InfoTooltip
+  const [resultSuccessful, setResultSuccessful] = React.useState(false);
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
+  const [infoMessage, setInfoMessage] = React.useState('');
+
   // Auth
   function handleLogin({ email, password }) {
     auth.login({ email, password })
@@ -51,8 +57,9 @@ function App(props) {
       .then((res) => {
         localStorage.setItem('token', token);
         setLoggedIn(true);
-        //setLoginResult(true);
-        //setIsInfoTooltipOpen(true);
+        setInfoMessage('Авторизация прошла успешно.');
+        setResultSuccessful(true);
+        setIsInfoTooltipOpen(true);
         mainApi.changeToken(token);
         setCurrentUser(res.user);
         props.history.push('/movies');
@@ -75,6 +82,9 @@ function App(props) {
         setCurrentUser(null);
         localStorage.removeItem('token');
         props.history.push('/signin');
+        setInfoMessage('Выход из аккаунта прошел успешно.');
+        setResultSuccessful(true);
+        setIsInfoTooltipOpen(true);
       })
       .catch((err) => handleError(err))
   }
@@ -82,8 +92,9 @@ function App(props) {
   function handleRegister({ name, email, password }) {
     auth.register({ name, email, password })
       .then(() => {
-        //setLoginResult(true);
-        //setIsInfoTooltipOpen(true);
+        setInfoMessage('Регистрация прошла успешно.');
+        setResultSuccessful(true);
+        setIsInfoTooltipOpen(true);
         props.history.push('/signin');
       })
       .catch((err) => handleError(err))
@@ -105,8 +116,6 @@ function App(props) {
   // CardList
   function clearCardList() {
     setIsResult(false);
-    //setIsAllCardsRendered(true);
-    //setRenderedCardList([]);
   }
 
   // Movies
@@ -172,6 +181,9 @@ function App(props) {
       mainApi.setProfileInfo({ name, email })
         .then((res) => {
           setCurrentUser(res.user);
+          setInfoMessage('Информация профиля успешно изменена.');
+          setResultSuccessful(true);
+          setIsInfoTooltipOpen(true);
         })
         .catch((err) => {
           setCurrentUser(currentUser);
@@ -191,6 +203,13 @@ function App(props) {
   // Others
   function handleError(error) {
     console.log(error);
+    setInfoMessage('Что-то пошло не так! Попробуйте ещё раз.');
+    setResultSuccessful(false);
+    setIsInfoTooltipOpen(true);
+  }
+
+  function handleCloseAllPopups() {
+    setIsInfoTooltipOpen(false);
   }
 
   return (
@@ -256,6 +275,7 @@ function App(props) {
           />
           <ProtectedRoute path="/" component={NotFound} />
         </Switch>
+        <InfoTooltip isOpen={isInfoTooltipOpen} result={resultSuccessful} onClose={handleCloseAllPopups} message={infoMessage} />
       </div>
     </CurrentUserContext.Provider >
   );
