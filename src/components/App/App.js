@@ -173,7 +173,10 @@ function App(props) {
         .then((res) => {
           setCurrentUser(res.user);
         })
-        .catch((err) => handleError(err))
+        .catch((err) => {
+          setCurrentUser(currentUser);
+          handleError(err)
+        })
         .finally(() => {
           setIsLoading(false);
           setIsEdit(false);
@@ -181,6 +184,11 @@ function App(props) {
     }
   }
 
+  function changeIsEdit(newIsEdit) {
+    setIsEdit(newIsEdit);
+  }
+
+  // Others
   function handleError(error) {
     console.log(error);
   }
@@ -206,6 +214,8 @@ function App(props) {
             onUserUpdate={handleUpdateUser}
             onLogout={handleLogout}
             isLoading={isLoading}
+            changeIsEdit={changeIsEdit}
+            isEdit={isEdit}
           />
           <ProtectedRoute
             path="/movies"

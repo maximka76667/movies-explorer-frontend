@@ -44,21 +44,17 @@ function Profile(props) {
       case 'name': {
         if (!inputElement.validity.valid) {
           setIsNameError(true);
-          setIsSubmitValid(false);
           return;
         }
         setIsNameError(false);
-        setIsSubmitValid(true);
         break;
       }
       case 'email': {
         if (!inputElement.validity.valid) {
           setIsEmailError(true);
-          setIsSubmitValid(false);
           return;
         }
         setIsEmailError(false);
-        setIsSubmitValid(true);
         break;
       }
       default: { }
@@ -68,13 +64,31 @@ function Profile(props) {
   function handleSubmit(e) {
     e.preventDefault();
 
+    if (!props.isEdit) {
+      props.changeIsEdit(true);
+    }
+
     if (props.isEdit) {
       props.onUserUpdate({
         name,
         email,
       })
+      setName(currentUser.name);
+      setEmail(currentUser.email);
     }
   }
+
+  React.useEffect(() => {
+    if (!isNameError || !isEmailError) {
+      return setIsSubmitValid(true);
+    }
+    return setIsSubmitValid(false);
+  }, [isNameError, isEmailError])
+
+  React.useEffect(() => {
+    setName(currentUser.name);
+    setEmail(currentUser.email);
+  }, [currentUser])
 
   return (
     <>
@@ -93,7 +107,7 @@ function Profile(props) {
               <input className={inputEmailClassName} onChange={handleChangeEmail} type="email" value={email} disabled={!props.isEdit} required />
             </div>
           </div>
-          <button className="profile__edit-button" type="submit" disabled={false}>{props.isEdit ? props.isLoading ? "Загрузка..." : "Сохранить" : "Редактировать"}</button>
+          <button className="profile__edit-button" type="submit" disabled={props.isEdit ? !isSubmitValid : false}>{props.isEdit ? props.isLoading ? "Загрузка..." : "Сохранить" : "Редактировать"}</button>
           <button className="profile__exit-button" onClick={props.onLogout}>Выйти из аккаунта</button>
         </form>
       </div>

@@ -8,6 +8,7 @@ function SavedMovies(props) {
 
   React.useEffect(() => {
     props.initSavedMovies();
+    // eslint-disable-next-line
   }, [props.savedMovies])
 
   return (
