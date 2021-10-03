@@ -78,6 +78,12 @@ function Profile(props) {
     }
   }
 
+  function handleLogout(e) {
+    e.preventDefault();
+
+    props.onLogout();
+  }
+
   React.useEffect(() => {
     if (!isNameError || !isEmailError) {
       return setIsSubmitValid(true);
@@ -108,7 +114,7 @@ function Profile(props) {
             </div>
           </div>
           <button className="profile__edit-button" type="submit" disabled={props.isEdit ? !isSubmitValid : false}>{props.isEdit ? props.isLoading ? "Загрузка..." : "Сохранить" : "Редактировать"}</button>
-          <button className="profile__exit-button" onClick={props.onLogout}>Выйти из аккаунта</button>
+          <button className="profile__exit-button" onClick={handleLogout}>Выйти из аккаунта</button>
         </form>
       </div>
     </>

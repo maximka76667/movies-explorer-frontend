@@ -68,7 +68,7 @@ function App(props) {
   }
 
   function handleLogout() {
-    auth.signout()
+    auth.signout(localStorage.getItem('token'))
       .then(() => {
         setLoggedIn(false);
         mainApi.changeToken('');

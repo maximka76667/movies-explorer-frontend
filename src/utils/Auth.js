@@ -37,11 +37,12 @@ class Auth {
       .then(this._checkResponse)
   }
 
-  signout() {
+  signout(token) {
     return fetch(`${this._baseUrl}/signout`, {
       method: 'GET',
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
       }
     })
   }
