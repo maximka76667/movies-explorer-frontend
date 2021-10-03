@@ -24,7 +24,7 @@ function MoviesCard(props) {
 
   React.useEffect(() => {
     setIsSaved(props.savedMovies.find(movie => movie.movieId === props.card.id || movie.movieId === props.card.movieId));
-  }, [props.cardList])
+  }, [props.cardList, props.savedMovies])
 
   return (
     <div className={`card ${isSaved ? "card_saved" : ''}`}>

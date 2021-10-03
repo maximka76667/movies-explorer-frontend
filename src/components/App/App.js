@@ -148,7 +148,8 @@ function App(props) {
   function handleUnsaveMovie(id) {
     mainApi.unsaveMovie(id)
       .then((deletedCard) => {
-        setCardList((savedMovies) => savedMovies.filter((movieCard) => deletedCard.movie._id !== movieCard._id))
+        const newSavedMovies = savedMovies.filter((movieCard) => deletedCard.movie._id !== movieCard._id)
+        setSavedMovies(newSavedMovies);
       })
       .catch(err => handleError(err))
   }
