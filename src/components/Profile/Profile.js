@@ -99,12 +99,12 @@ function Profile(props) {
           <div className="profile__info">
             <div className="profile__field">
               <h2 className="profile__field-name">Имя</h2>
-              <input className={inputNameClassName} onChange={handleChangeName} type="text" value={name} disabled={!props.isEdit} required />
+              <input className={inputNameClassName} onChange={handleChangeName} type="text" name="name" value={name} disabled={!props.isEdit} required />
             </div>
             <hr className="profile__line" />
             <div className="profile__field">
               <h2 className="profile__field-name">E-mail</h2>
-              <input className={inputEmailClassName} onChange={handleChangeEmail} type="email" value={email} disabled={!props.isEdit} required />
+              <input className={inputEmailClassName} onChange={handleChangeEmail} type="email" name="email" value={email} disabled={!props.isEdit} required />
             </div>
           </div>
           <button className="profile__edit-button" type="submit" disabled={props.isEdit ? !isSubmitValid : false}>{props.isEdit ? props.isLoading ? "Загрузка..." : "Сохранить" : "Редактировать"}</button>
