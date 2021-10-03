@@ -58,8 +58,8 @@ class Api {
         year: data.year,
         description: data.description,
         image: data.image.url ? `https://api.nomoreparties.co${data.image.url}` : data.image,
-        trailer: data.trailerLink,
-        thumbnail: data.trailerLink,
+        trailer: data.trailerLink ? data.trailerLink : 'https://yandex.ru',
+        thumbnail: data.trailerLink ? data.trailerLink : 'https://yandex.ru',
         movieId: data.id || data.movieId,
         nameRU: data.nameRU,
         nameEN: data.nameEN,
@@ -77,16 +77,6 @@ class Api {
     })
       .then(this._checkResponse);
   }
-
-  // changeMovieSavedStatus(movieId, isSaved) {
-  //   return fetch(`${this._baseUrl}/cards/${movieId}/likes`, {
-  //     method: isSaved ? 'DELETE' : 'PUT',
-  //     headers: {
-  //       authorization: this._token,
-  //     },
-  //   })
-  //     .then(this._checkResponse);
-  // }
 
   changeToken(token) {
     this._token = `Bearer ${token}`

@@ -148,7 +148,7 @@ function App(props) {
   function handleUnsaveMovie(id) {
     mainApi.unsaveMovie(id)
       .then((deletedCard) => {
-        setSavedMovies((savedMovies) => savedMovies.filter((movieCard) => deletedCard._id !== movieCard._id))
+        setCardList((savedMovies) => savedMovies.filter((movieCard) => deletedCard.movie._id !== movieCard._id))
       })
       .catch(err => handleError(err))
   }
@@ -183,83 +183,6 @@ function App(props) {
   function handleError(error) {
     console.log(error);
   }
-
-  //const renderCards = (countCardsOfWidth, renderedCards) => {
-  // const cardsForRender = [];
-
-  // console.log(cardList, 'cardList');
-
-  // const countCardsForRender = location.pathname === "/saved-movies" ? cardList.length : countCardsOfWidth;
-
-  // for (let i = 0; i < countCardsForRender; i++) {
-  //   const newCardIndex = i + renderedCards.length;
-  //   const newCard = cardList?.[newCardIndex] || 0;
-
-  //   if (newCardIndex >= cardList?.length - 1) {
-  //     if (newCardIndex === cardList?.length - 1) {
-  //       cardsForRender.push(newCard);
-  //     }
-  //     setIsAllCardsRendered(true);
-  //     break;
-  //   }
-
-  //   cardsForRender.push(newCard);
-  // }
-
-  // setRenderedCardList([...renderedCards, ...cardsForRender]);
-  //}
-
-  // function checkCountOfCards() {
-  //   const width = window.innerWidth;
-
-  //   if (width > 800) {
-  //     setCountCardsOfWidth(3);
-  //   }
-
-  //   if (width > 650 && width <= 800) {
-  //     setCountCardsOfWidth(2);
-  //   }
-
-  //   if (width <= 650) {
-  //     setCountCardsOfWidth(1);
-  //   }
-  // }
-
-  // React.useEffect(() => {
-  //   window.addEventListener('resize', (e) => {
-  //     checkCountOfCards();
-  //   })
-
-  //   checkCountOfCards();
-  //   //renderCards(countCardsOfWidth, renderedCardList);
-
-  //   // eslint-disable-next-line
-  // }, []);
-
-  //React.useEffect(() => {
-  //clearCardList();
-  //renderCards(countCardsOfWidth, []);
-  // eslint-disable-next-line
-  //}, [countCardsOfWidth]);
-
-  //React.useEffect(() => {
-  //clearCardList();
-  //renderCards(countCardsOfWidth, []);
-  // eslint-disable-next-line
-  //}, [cardList])
-
-  // React.useEffect(() => {
-  //   if (isNotFound) {
-  //     setIsAllCardsRendered(true);
-  //   }
-  // }, [isNotFound])
-
-  // React.useEffect(() => {
-  //   renderCards(countCardsOfWidth, []);
-  //   if (cardList.length === 0) {
-  //     setIsAllCardsRendered(true);
-  //   }
-  // }, [cardList])
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

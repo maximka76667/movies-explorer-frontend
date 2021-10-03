@@ -16,7 +16,7 @@ function MoviesCardList(props) {
   const [countCardsOfWidth, setCountCardsOfWidth] = React.useState(0);
 
   const renderItem = (card) => (
-    <MoviesCard key={card.id} card={card} onSaveMovie={props.onSaveMovie} onUnsaveMovie={props.onUnsaveMovie} savedMovies={props.savedMovies} />
+    <MoviesCard key={card.id} card={card} cardId={card._id} onSaveMovie={props.onSaveMovie} onUnsaveMovie={props.onUnsaveMovie} cardList={cardList} savedMovies={props.savedMovies} />
   )
 
   function renderCardList(countCardsOfWidth, cardList) {
@@ -76,6 +76,12 @@ function MoviesCardList(props) {
   React.useEffect(() => {
     renderCardList(countCardsOfWidth, []);
   }, [countCardsOfWidth]);
+
+  React.useEffect(() => {
+    if (cardList.length === 0) {
+      setIsAllCardsRendered(true);
+    }
+  }, [cardList])
 
   return (
     <div className="card-list">

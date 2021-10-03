@@ -4,8 +4,6 @@ import Logo from '../Logo/Logo';
 import './Login.css';
 
 function Login(props) {
-
-  // const [input, handleInputChange] = useInputChange();
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 

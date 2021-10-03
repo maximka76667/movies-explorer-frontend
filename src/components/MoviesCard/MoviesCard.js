@@ -2,14 +2,12 @@ import React from 'react';
 import './MoviesCard.css'
 
 function MoviesCard(props) {
-
-  const [cardId, setCardId] = React.useState('');
-  const [isSaved, setIsSaved] = React.useState(props.savedMovies.find(movie => movie.movieId === props.card.id || movie.movieId === props.card.movieId));
+  const [isSaved, setIsSaved] = React.useState(false);
 
   function handleSaveMovie() {
     if (isSaved) {
-      props.onUnsaveMovie(cardId);
       setIsSaved(false);
+      props.onUnsaveMovie(props.cardId);
     }
     if (!isSaved) {
       props.onSaveMovie(props.card);
@@ -25,13 +23,8 @@ function MoviesCard(props) {
   }
 
   React.useEffect(() => {
-    props.savedMovies.forEach((movie) => {
-      if (movie.movieId === props.card.id || movie.movieId === props.card.movieId) {
-        setCardId(movie._id);
-      }
-    });
-    // eslint-disable-next-line
-  }, [])
+    setIsSaved(props.savedMovies.find(movie => movie.movieId === props.card.id || movie.movieId === props.card.movieId));
+  }, [props.cardList])
 
   return (
     <div className={`card ${isSaved ? "card_saved" : ''}`}>
