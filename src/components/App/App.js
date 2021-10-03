@@ -265,17 +265,16 @@ function App(props) {
             savedMovies={savedMovies}
             initSavedMovies={handleInitSavedMovies}
             clearCardList={clearCardList}
-            //renderedCardList={renderedCardList}
-            //isAllCardsRendered={isAllCardsRendered}
-            //countCardsOfWidth={countCardsOfWidth}
-            //setRenderedCardList={setRenderedCardList}
-            //setIsAllCardsRendered={setIsAllCardsRendered}
-            //setCountCardsOfWidth={setCountCardsOfWidth}
             onSearchMyMovies={handleSearchMyMovies}
           />
           <ProtectedRoute path="/" component={NotFound} />
         </Switch>
-        <InfoTooltip isOpen={isInfoTooltipOpen} result={resultSuccessful} onClose={handleCloseAllPopups} message={infoMessage} />
+        <InfoTooltip
+          isOpen={isInfoTooltipOpen}
+          result={resultSuccessful}
+          onClose={handleCloseAllPopups}
+          message={infoMessage}
+        />
       </div>
     </CurrentUserContext.Provider >
   );
