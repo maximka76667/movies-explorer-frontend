@@ -24,9 +24,6 @@ function App(props) {
 
   // CardList
   const [initCardList, setInitCardList] = React.useState([]);
-  const [renderedCardList, setRenderedCardList] = React.useState([]);
-  const [isAllCardsRendered, setIsAllCardsRendered] = React.useState(false);
-  const [countCardsOfWidth, setCountCardsOfWidth] = React.useState(0);
 
   // Movies
   const [cardList, setCardList] = React.useState([]);
@@ -62,10 +59,8 @@ function App(props) {
         mainApi.getSavedMovies()
           .then((movies) => {
             const filteredMovies = movies.movies.filter((movie) => {
-              console.log(movie.owner, res.user._id, res.user);
               return movie.owner === res.user._id
             });
-            console.log(filteredMovies);
             setSavedMovies(filteredMovies);
           })
       })
@@ -110,8 +105,8 @@ function App(props) {
   // CardList
   function clearCardList() {
     setIsResult(false);
-    setIsAllCardsRendered(true);
-    setRenderedCardList([]);
+    //setIsAllCardsRendered(true);
+    //setRenderedCardList([]);
   }
 
   // Movies
@@ -143,39 +138,22 @@ function App(props) {
 
   // Movie Card
   function handleSaveMovie(data) {
-    console.log(data);
     mainApi.saveMovie(data)
-      // .then((movie) => {
-      //   setSavedMovies({ ...savedMovies, movie });
-      // })
+      .then((movie) => {
+        setSavedMovies([movie.movie, ...savedMovies]);
+      })
       .catch((err) => handleError(err))
   }
 
   function handleUnsaveMovie(id) {
     mainApi.unsaveMovie(id)
+      .then((deletedCard) => {
+        setSavedMovies((savedMovies) => savedMovies.filter((movieCard) => deletedCard._id !== movieCard._id))
+      })
       .catch(err => handleError(err))
   }
 
   function handleSearchMyMovies(searchValue, isShort) {
-    // setIsSearching(true);
-    // setIsResult(false);
-    // mainApi.getSavedMovies()
-    //   .then(({ movies }) => {
-    //     console.log(searchValue, isShort);
-    //     console.log(movies);
-    //     if (movies.length === 0) return setIsNotFound(true);
-    //     const regExp = new RegExp(searchValue.toLowerCase());
-    //     const filteredMovies = movies
-    //       .filter((movie) => regExp.test(movie.nameRU.toLowerCase()))
-    //       .filter((m) => isShort ? m.duration <= 60 : m.duration > 60)
-    //     if (filteredMovies.length === 0) return setIsNotFound(true);
-    //     setIsNotFound(false);
-    //     setIsResult(true);
-    //     setCardList(filteredMovies);
-    //   })
-    //   .catch((err) => console.log(err))
-    //   .finally(() => setIsSearching(false))
-    console.log(initCardList);
     if (initCardList.length === 0) return setIsNotFound(true);
     const regExp = new RegExp(searchValue.toLowerCase());
     const filteredMovies = initCardList
@@ -206,57 +184,57 @@ function App(props) {
     console.log(error);
   }
 
-  // const renderCards = (countCardsOfWidth, renderedCards) => {
-  //   const cardsForRender = [];
+  //const renderCards = (countCardsOfWidth, renderedCards) => {
+  // const cardsForRender = [];
 
-  //   console.log(cardList, 'cardList');
+  // console.log(cardList, 'cardList');
 
-  //   const countCardsForRender = location.pathname === "/saved-movies" ? cardList.length : countCardsOfWidth;
+  // const countCardsForRender = location.pathname === "/saved-movies" ? cardList.length : countCardsOfWidth;
 
-  //   for (let i = 0; i < countCardsForRender; i++) {
-  //     const newCardIndex = i + renderedCards.length;
-  //     const newCard = cardList?.[newCardIndex] || 0;
+  // for (let i = 0; i < countCardsForRender; i++) {
+  //   const newCardIndex = i + renderedCards.length;
+  //   const newCard = cardList?.[newCardIndex] || 0;
 
-  //     if (newCardIndex >= cardList?.length - 1) {
-  //       if (newCardIndex === cardList?.length - 1) {
-  //         cardsForRender.push(newCard);
-  //       }
-  //       setIsAllCardsRendered(true);
-  //       break;
+  //   if (newCardIndex >= cardList?.length - 1) {
+  //     if (newCardIndex === cardList?.length - 1) {
+  //       cardsForRender.push(newCard);
   //     }
-
-  //     cardsForRender.push(newCard);
+  //     setIsAllCardsRendered(true);
+  //     break;
   //   }
 
-  //   setRenderedCardList([...renderedCards, ...cardsForRender]);
+  //   cardsForRender.push(newCard);
   // }
 
-  function checkCountOfCards() {
-    const width = window.innerWidth;
+  // setRenderedCardList([...renderedCards, ...cardsForRender]);
+  //}
 
-    if (width > 800) {
-      setCountCardsOfWidth(3);
-    }
+  // function checkCountOfCards() {
+  //   const width = window.innerWidth;
 
-    if (width > 650 && width <= 800) {
-      setCountCardsOfWidth(2);
-    }
+  //   if (width > 800) {
+  //     setCountCardsOfWidth(3);
+  //   }
 
-    if (width <= 650) {
-      setCountCardsOfWidth(1);
-    }
-  }
+  //   if (width > 650 && width <= 800) {
+  //     setCountCardsOfWidth(2);
+  //   }
 
-  React.useEffect(() => {
-    window.addEventListener('resize', (e) => {
-      checkCountOfCards();
-    })
+  //   if (width <= 650) {
+  //     setCountCardsOfWidth(1);
+  //   }
+  // }
 
-    checkCountOfCards();
-    //renderCards(countCardsOfWidth, renderedCardList);
+  // React.useEffect(() => {
+  //   window.addEventListener('resize', (e) => {
+  //     checkCountOfCards();
+  //   })
 
-    // eslint-disable-next-line
-  }, []);
+  //   checkCountOfCards();
+  //   //renderCards(countCardsOfWidth, renderedCardList);
+
+  //   // eslint-disable-next-line
+  // }, []);
 
   //React.useEffect(() => {
   //clearCardList();
@@ -334,12 +312,12 @@ function App(props) {
             savedMovies={savedMovies}
             initSavedMovies={handleInitSavedMovies}
             clearCardList={clearCardList}
-            renderedCardList={renderedCardList}
-            isAllCardsRendered={isAllCardsRendered}
-            countCardsOfWidth={countCardsOfWidth}
-            setRenderedCardList={setRenderedCardList}
-            setIsAllCardsRendered={setIsAllCardsRendered}
-            setCountCardsOfWidth={setCountCardsOfWidth}
+            //renderedCardList={renderedCardList}
+            //isAllCardsRendered={isAllCardsRendered}
+            //countCardsOfWidth={countCardsOfWidth}
+            //setRenderedCardList={setRenderedCardList}
+            //setIsAllCardsRendered={setIsAllCardsRendered}
+            //setCountCardsOfWidth={setCountCardsOfWidth}
             onSearchMyMovies={handleSearchMyMovies}
           />
           <ProtectedRoute path="/" component={NotFound} />

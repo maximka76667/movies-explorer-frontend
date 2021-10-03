@@ -8,7 +8,7 @@ function SavedMovies(props) {
 
   React.useEffect(() => {
     props.initSavedMovies();
-  }, [])
+  }, [props.savedMovies])
 
   return (
     <>

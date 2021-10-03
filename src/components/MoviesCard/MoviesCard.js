@@ -8,7 +8,6 @@ function MoviesCard(props) {
 
   function handleSaveMovie() {
     if (isSaved) {
-      console.log(props.savedMovies);
       props.onUnsaveMovie(cardId);
       setIsSaved(false);
     }
@@ -27,7 +26,6 @@ function MoviesCard(props) {
 
   React.useEffect(() => {
     props.savedMovies.forEach((movie) => {
-      console.log(movie.movieId, props.card);
       if (movie.movieId === props.card.id || movie.movieId === props.card.movieId) {
         setCardId(movie._id);
       }
