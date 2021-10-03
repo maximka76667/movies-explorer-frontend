@@ -1,4 +1,3 @@
-import { useLocation } from 'react-router';
 import fail from '../../images/fail-icon.svg'
 import success from '../../images/success-icon.svg'
 import './InfoTooltip.css'

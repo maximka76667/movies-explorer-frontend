@@ -65,15 +65,9 @@ function MoviesCardList(props) {
     }
   }
 
-  React.useEffect(() => {
-    window.addEventListener('resize', (e) => {
-      checkCountOfCards();
-    })
-
+  const checkCountOfCardsCallback = () => {
     checkCountOfCards();
-
-    // eslint-disable-next-line
-  }, []);
+  }
 
   React.useEffect(() => {
     renderCardList(countCardsOfWidth, []);
@@ -84,7 +78,19 @@ function MoviesCardList(props) {
     if (cardList.length === 0) {
       setIsAllCardsRendered(true);
     }
-  }, [cardList])
+  }, [cardList]);
+
+  React.useEffect(() => {
+    window.addEventListener('resize', checkCountOfCardsCallback)
+
+    checkCountOfCards();
+
+    return () => {
+      window.removeEventListener('resize', checkCountOfCardsCallback)
+    }
+
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <div className="card-list">
