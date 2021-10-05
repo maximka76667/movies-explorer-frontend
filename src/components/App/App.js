@@ -67,8 +67,8 @@ function App(props) {
         setIsInfoTooltipOpen(true);
         mainApi.changeToken(token);
         setCurrentUser(res.user);
-        props.history.push(requestedPathname);
-        if (requestedPathname === '/signin' || requestedPathname === '/signup') props.history.push('/movies');
+        if (requestedPathname === '/signin' || requestedPathname === '/signup') props.history.push('/movies')
+        else props.history.push(requestedPathname);
         mainApi.getSavedMovies()
           .then((movies) => {
             const filteredMovies = movies.movies.filter((movie) => movie.owner === res.user._id);

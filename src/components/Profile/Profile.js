@@ -85,7 +85,7 @@ function Profile(props) {
   }
 
   React.useEffect(() => {
-    if (!isNameError || !isEmailError) {
+    if (!isNameError && !isEmailError) {
       return setIsSubmitValid(true);
     }
     return setIsSubmitValid(false);
@@ -95,6 +95,13 @@ function Profile(props) {
     setName(currentUser.name);
     setEmail(currentUser.email);
   }, [currentUser])
+
+  React.useEffect(() => {
+    if (props.isEdit) {
+      if (email === currentUser.email && name === currentUser.name) setIsSubmitValid(false);
+      else setIsSubmitValid(true);
+    }
+  }, [name, email, isSubmitValid, props.isEdit, currentUser])
 
   return (
     <>
