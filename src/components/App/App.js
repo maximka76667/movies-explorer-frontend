@@ -14,8 +14,12 @@ import moviesApi from '../../utils/MoviesApi'
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Movies from '../Movies/Movies';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
+import {useLocation} from 'react-router'
 
 function App(props) {
+
+  const location = useLocation();
+
   // Auth
   const [currentUser, setCurrentUser] = React.useState({});
   const [loggedIn, setLoggedIn] = React.useState(false);
@@ -62,7 +66,7 @@ function App(props) {
         setIsInfoTooltipOpen(true);
         mainApi.changeToken(token);
         setCurrentUser(res.user);
-        props.history.push('/movies');
+        if(location.pathname === '/signin' || location.pathname === '/signup') props.history.push('/movies');
         mainApi.getSavedMovies()
           .then((movies) => {
             const filteredMovies = movies.movies.filter((movie) => movie.owner === res.user._id);
