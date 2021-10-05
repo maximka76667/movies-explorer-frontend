@@ -65,9 +65,7 @@ function App(props) {
         props.history.push('/movies');
         mainApi.getSavedMovies()
           .then((movies) => {
-            const filteredMovies = movies.movies.filter((movie) => {
-              return movie.owner === res.user._id
-            });
+            const filteredMovies = movies.movies.filter((movie) => movie.owner === res.user._id);
             setSavedMovies(filteredMovies);
           })
       })
@@ -81,7 +79,7 @@ function App(props) {
         mainApi.changeToken('');
         setCurrentUser(null);
         localStorage.removeItem('token');
-        props.history.push('/signin');
+        props.history.push('/');
         setInfoMessage('Выход из аккаунта прошел успешно.');
         setResultSuccessful(true);
         setIsInfoTooltipOpen(true);
@@ -133,7 +131,7 @@ function App(props) {
         setIsResult(true);
         setCardList(filteredMovies);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => handleError(err))
       .finally(() => setIsSearching(false))
   }
 
@@ -148,9 +146,7 @@ function App(props) {
   // Movie Card
   function handleSaveMovie(data) {
     mainApi.saveMovie(data)
-      .then((movie) => {
-        setSavedMovies([movie.movie, ...savedMovies]);
-      })
+      .then((movie) => setSavedMovies([movie.movie, ...savedMovies]))
       .catch((err) => handleError(err))
   }
 
