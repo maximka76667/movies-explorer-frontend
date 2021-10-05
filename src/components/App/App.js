@@ -14,7 +14,7 @@ import moviesApi from '../../utils/MoviesApi'
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Movies from '../Movies/Movies';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
-import {useLocation} from 'react-router'
+import { useLocation } from 'react-router'
 
 function App(props) {
 
@@ -57,6 +57,7 @@ function App(props) {
   }
 
   function handleAuth(token) {
+    const requestedPathname = location.pathname;
     auth.getEmail(token)
       .then((res) => {
         localStorage.setItem('token', token);
@@ -66,7 +67,8 @@ function App(props) {
         setIsInfoTooltipOpen(true);
         mainApi.changeToken(token);
         setCurrentUser(res.user);
-        if(location.pathname === '/signin' || location.pathname === '/signup') props.history.push('/movies');
+        props.history.push(requestedPathname);
+        if (requestedPathname === '/signin' || requestedPathname === '/signup') props.history.push('/movies');
         mainApi.getSavedMovies()
           .then((movies) => {
             const filteredMovies = movies.movies.filter((movie) => movie.owner === res.user._id);
@@ -267,7 +269,9 @@ function App(props) {
             clearCardList={clearCardList}
             onSearchMyMovies={handleSearchMyMovies}
           />
-          <ProtectedRoute path="/" component={NotFound} />
+          <Route path="/">
+            <NotFound />
+          </Route>
         </Switch>
         <InfoTooltip
           isOpen={isInfoTooltipOpen}
