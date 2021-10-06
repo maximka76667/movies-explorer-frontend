@@ -8,8 +8,7 @@ function MoviesCard(props) {
   function handleSaveMovie() {
     if (isSaved) {
       setIsSaved(false);
-      console.log(cardId);
-      props.onUnsaveMovie(cardId ?? props.cardId);
+      props.onUnsaveMovie(cardId);
     }
     if (!isSaved) {
       props.onSaveMovie(props.card);

@@ -57,8 +57,16 @@
   padding: 5px;
 }
 
+.saved-movies .card_saved .card__save-button {
+  background: transparent;
+  opacity: 0;
+  visibility: hidden;
+}
+
 .card_saved:hover .card__save-button {
   background: url("../../images/cancel-icon.svg") 50% 50% no-repeat;
+  opacity: 1;
+  visibility: visible;
 }
 
 .card__poster-img {
