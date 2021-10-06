@@ -14,7 +14,9 @@ import moviesApi from '../../utils/MoviesApi'
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Movies from '../Movies/Movies';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
-import { useLocation } from 'react-router'
+import { useLocation } from 'react-router';
+import filter from '../../utils/filter';
+import { MESSAGES } from '../../config';
 
 function App(props) {
 
@@ -63,7 +65,7 @@ function App(props) {
       .then((res) => {
         localStorage.setItem('token', token);
         setLoggedIn(true);
-        handleInfo(true, 'Авторизация прошла успешно.')
+        handleInfo(true, MESSAGES.auth)
         mainApi.changeToken(token);
         setCurrentUser(res.user);
         if (requestedPathname === '/signin' || requestedPathname === '/signup') props.history.push('/movies')
@@ -85,15 +87,15 @@ function App(props) {
         setCurrentUser(null);
         localStorage.removeItem('token');
         props.history.push('/');
-        handleInfo(true, 'Выход из аккаунта прошел успешно.')
+        handleInfo(true, MESSAGES.logout)
       })
-      .catch((err) => handleError(err))
+      .catch((err) => handleError(err));
   }
 
   function handleRegister({ name, email, password }) {
     auth.register({ name, email, password })
       .then(() => {
-        handleInfo(true, 'Регистрация прошла успешно.')
+        handleInfo(true, MESSAGES.register)
         handleLogin({ email, password });
       })
       .catch((err) => handleError(err))
@@ -111,18 +113,10 @@ function App(props) {
     setIsResult(false);
   }
 
-  function filter(cardList, searchValue, isShort) {
-    const regExp = new RegExp(searchValue.toLowerCase());
-    const filteredMovies = cardList
-      .filter((movie) => regExp.test(movie.nameRU.toLowerCase()))
-      .filter((m) => isShort ? m.duration <= 40 : m.duration > 40)
-    return filteredMovies;
-  }
-
   // Movies
   function handleSearchAllMovies(searchValue, isShort) {
     setIsResult(false);
-    if (!searchValue) return handleInfo(false, 'Заполните поле поиска.');
+    if (!searchValue) return handleInfo(false, MESSAGES.searchError);
     const filteredMovies = filter(initCardList, searchValue, isShort);
     if (filteredMovies?.length === 0) return setIsNotFound(true);
     setCardList(filteredMovies);
@@ -155,7 +149,7 @@ function App(props) {
   }
 
   function handleSearchMyMovies(searchValue, isShort) {
-    if (!searchValue) return handleInfo(false, 'Заполните поле поиска.');
+    if (!searchValue) return handleInfo(false, MESSAGES.searchError);
     if (initSavedCardList.length === 0) return setIsNotFound(true);
     const filteredMovies = filter(initSavedCardList, searchValue, isShort)
     if (filteredMovies.length === 0) return setIsNotFound(true);
@@ -170,7 +164,7 @@ function App(props) {
       mainApi.setProfileInfo({ name, email })
         .then((res) => {
           setCurrentUser(res.user);
-          handleInfo(true, 'Информация профиля успешно изменена.')
+          handleInfo(true, MESSAGES.userUpdate)
         })
         .catch((err) => {
           setCurrentUser(currentUser);
@@ -190,7 +184,7 @@ function App(props) {
   // Others
   function handleError(error) {
     console.log(error);
-    handleInfo(false, 'Что-то пошло не так! Попробуйте ещё раз.')
+    handleInfo(false, MESSAGES.defaultError)
   }
 
   function handleInfo(success, message) {
