@@ -63,9 +63,7 @@ function App(props) {
       .then((res) => {
         localStorage.setItem('token', token);
         setLoggedIn(true);
-        setInfoMessage('Авторизация прошла успешно.');
-        setResultSuccessful(true);
-        setIsInfoTooltipOpen(true);
+        handleInfo(true, 'Авторизация прошла успешно.')
         mainApi.changeToken(token);
         setCurrentUser(res.user);
         if (requestedPathname === '/signin' || requestedPathname === '/signup') props.history.push('/movies')
@@ -87,19 +85,15 @@ function App(props) {
         setCurrentUser(null);
         localStorage.removeItem('token');
         props.history.push('/');
-        setInfoMessage('Выход из аккаунта прошел успешно.');
-        setResultSuccessful(true);
-        setIsInfoTooltipOpen(true);
+        handleInfo(true, 'Выход из аккаунта прошел успешно.')
       })
       .catch((err) => handleError(err))
   }
 
   function handleRegister({ name, email, password }) {
     auth.register({ name, email, password })
-      .then((res) => {
-        setInfoMessage('Регистрация прошла успешно.');
-        setResultSuccessful(true);
-        setIsInfoTooltipOpen(true);
+      .then(() => {
+        handleInfo(true, 'Регистрация прошла успешно.')
         handleLogin({ email, password });
       })
       .catch((err) => handleError(err))
@@ -117,18 +111,19 @@ function App(props) {
     setIsResult(false);
   }
 
+  function filter(cardList, searchValue, isShort) {
+    const regExp = new RegExp(searchValue.toLowerCase());
+    const filteredMovies = cardList
+      .filter((movie) => regExp.test(movie.nameRU.toLowerCase()))
+      .filter((m) => isShort ? m.duration <= 40 : m.duration > 40)
+    return filteredMovies;
+  }
+
   // Movies
   function handleSearchAllMovies(searchValue, isShort) {
     setIsResult(false);
-    if (!searchValue) {
-      setResultSuccessful(false);
-      setIsInfoTooltipOpen(true);
-      setInfoMessage('Заполните поле поиска.');
-    }
-    const regExp = new RegExp(searchValue.toLowerCase());
-    const filteredMovies = initCardList
-      .filter((movie) => regExp.test(movie.nameRU.toLowerCase()))
-      .filter((m) => isShort ? m.duration <= 40 : m.duration > 40)
+    if (!searchValue) return handleInfo(false, 'Заполните поле поиска.');
+    const filteredMovies = filter(initCardList, searchValue, isShort);
     if (filteredMovies?.length === 0) return setIsNotFound(true);
     setCardList(filteredMovies);
     setIsNotFound(false);
@@ -160,14 +155,12 @@ function App(props) {
   }
 
   function handleSearchMyMovies(searchValue, isShort) {
+    if (!searchValue) return handleInfo(false, 'Заполните поле поиска.');
     if (initSavedCardList.length === 0) return setIsNotFound(true);
-    const regExp = new RegExp(searchValue.toLowerCase());
-    const filteredMovies = initSavedCardList
-      .filter((movie) => regExp.test(movie.nameRU.toLowerCase()))
-      .filter((m) => isShort ? m.duration <= 40 : m.duration > 40)
+    const filteredMovies = filter(initSavedCardList, searchValue, isShort)
     if (filteredMovies.length === 0) return setIsNotFound(true);
-    setIsNotFound(false);
     setCardList(filteredMovies);
+    setIsNotFound(false);
   }
 
   // Profile
@@ -177,9 +170,7 @@ function App(props) {
       mainApi.setProfileInfo({ name, email })
         .then((res) => {
           setCurrentUser(res.user);
-          setInfoMessage('Информация профиля успешно изменена.');
-          setResultSuccessful(true);
-          setIsInfoTooltipOpen(true);
+          handleInfo(true, 'Информация профиля успешно изменена.')
         })
         .catch((err) => {
           setCurrentUser(currentUser);
@@ -199,8 +190,12 @@ function App(props) {
   // Others
   function handleError(error) {
     console.log(error);
-    setInfoMessage('Что-то пошло не так! Попробуйте ещё раз.');
-    setResultSuccessful(false);
+    handleInfo(false, 'Что-то пошло не так! Попробуйте ещё раз.')
+  }
+
+  function handleInfo(success, message) {
+    setResultSuccessful(success);
+    setInfoMessage(message);
     setIsInfoTooltipOpen(true);
   }
 
