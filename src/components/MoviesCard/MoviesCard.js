@@ -29,7 +29,7 @@ function MoviesCard(props) {
 
   return (
     <div className={`card ${isSaved ? "card_saved" : ''}`}>
-      <a className="card__poster" href={props.card.trailerLink ?? props.card.trailer}>
+      <a className="card__poster" href={props.card.trailerLink ?? props.card.trailer} rel="noreferrer" target="_blank">
         <img className="card__poster-img" src={props.card.image.url ? `https://api.nomoreparties.co${props.card.image.url}` : props.card.image} alt={props.card.nameEN} />
       </a>
       <div className="card__info">
