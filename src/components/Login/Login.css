@@ -45,6 +45,7 @@
 
 .login__form-input_error {
   color: #ff3055;
+  border-bottom: 1px solid #ff3055;
 }
 
 .login__form-error {
