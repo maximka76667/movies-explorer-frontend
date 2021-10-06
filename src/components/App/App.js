@@ -108,7 +108,7 @@ function App(props) {
     }
   }
 
-  // CardList
+  // Card List
   function clearCardList() {
     setIsResult(false);
   }
