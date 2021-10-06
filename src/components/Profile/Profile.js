@@ -2,6 +2,7 @@ import React from 'react';
 import './Profile.css';
 import Header from "../Header/Header";
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import validator from 'validator';
 
 function Profile(props) {
 
@@ -50,7 +51,7 @@ function Profile(props) {
         break;
       }
       case 'email': {
-        if (!inputElement.validity.valid) {
+        if (!inputElement.validity.valid || !validator.isEmail(inputElement.value)) {
           setIsEmailError(true);
           return;
         }
@@ -64,9 +65,7 @@ function Profile(props) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (!props.isEdit) {
-      props.changeIsEdit(true);
-    }
+    if (!props.isEdit) props.changeIsEdit(true);
 
     if (props.isEdit) {
       props.onUserUpdate({
@@ -85,23 +84,15 @@ function Profile(props) {
   }
 
   React.useEffect(() => {
-    if (!isNameError && !isEmailError) {
-      return setIsSubmitValid(true);
-    }
-    return setIsSubmitValid(false);
-  }, [isNameError, isEmailError])
-
-  React.useEffect(() => {
     setName(currentUser.name);
     setEmail(currentUser.email);
   }, [currentUser])
 
   React.useEffect(() => {
-    if (props.isEdit) {
-      if (email === currentUser.email && name === currentUser.name) setIsSubmitValid(false);
-      else setIsSubmitValid(true);
-    }
-  }, [name, email, isSubmitValid, props.isEdit, currentUser])
+    if (name === currentUser.name && email === currentUser.email) return setIsSubmitValid(false);
+    else if (!isNameError && !isEmailError) return setIsSubmitValid(true);
+    return setIsSubmitValid(false);
+  }, [name, email, currentUser, isNameError, isEmailError])
 
   return (
     <>

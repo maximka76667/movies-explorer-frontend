@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import './Register.css';
+import validator from 'validator';
 
 function Register(props) {
   const [name, setName] = React.useState('');
@@ -69,7 +70,7 @@ function Register(props) {
         break;
       }
       case 'email': {
-        if (!inputElement.validity.valid) {
+        if (!inputElement.validity.valid || !validator.isEmail(inputElement.value)) {
           setIsEmailError(true);
           setEmailError(inputElement.validationMessage);
           return;

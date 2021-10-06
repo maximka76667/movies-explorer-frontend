@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
 import './Login.css';
+import validator from 'validator';
 
 function Login(props) {
   const [email, setEmail] = React.useState('');
@@ -46,7 +47,7 @@ function Login(props) {
 
     switch (inputElement.name) {
       case 'email': {
-        if (!inputElement.validity.valid) {
+        if (!inputElement.validity.valid || !validator.isEmail(inputElement.value)) {
           setIsEmailError(true);
           setEmailError(inputElement.validationMessage);
           return;
