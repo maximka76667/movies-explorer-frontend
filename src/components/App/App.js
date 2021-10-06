@@ -28,6 +28,7 @@ function App(props) {
   const [isLoading, setIsLoading] = React.useState(false);
 
   // CardList
+  const [initSavedCardList, setInitSavedCardList] = React.useState([]);
   const [initCardList, setInitCardList] = React.useState([]);
 
   // Movies
@@ -111,12 +112,6 @@ function App(props) {
     }
   }
 
-  React.useEffect(() => {
-    handleTokenCheck();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
   // CardList
   function clearCardList() {
     setIsResult(false);
@@ -124,28 +119,27 @@ function App(props) {
 
   // Movies
   function handleSearchAllMovies(searchValue, isShort) {
-    setIsSearching(true);
     setIsResult(false);
-    moviesApi.getMovies()
-      .then(movies => {
-        const regExp = new RegExp(searchValue.toLowerCase());
-        const filteredMovies = movies
-          .filter((movie) => regExp.test(movie.nameRU.toLowerCase()))
-          .filter((m) => isShort ? m.duration <= 40 : m.duration > 40)
-        if (filteredMovies?.length === 0) return setIsNotFound(true);
-        setIsNotFound(false);
-        setIsResult(true);
-        setCardList(filteredMovies);
-      })
-      .catch((err) => handleError(err))
-      .finally(() => setIsSearching(false))
+    if (!searchValue) {
+      setResultSuccessful(false);
+      setIsInfoTooltipOpen(true);
+      setInfoMessage('Заполните поле поиска.');
+    }
+    const regExp = new RegExp(searchValue.toLowerCase());
+    const filteredMovies = initCardList
+      .filter((movie) => regExp.test(movie.nameRU.toLowerCase()))
+      .filter((m) => isShort ? m.duration <= 40 : m.duration > 40)
+    if (filteredMovies?.length === 0) return setIsNotFound(true);
+    setCardList(filteredMovies);
+    setIsNotFound(false);
+    setIsResult(true);
   }
 
   // Saved Movies
   function handleInitSavedMovies() {
     setIsNotFound(false);
     setIsResult(true);
-    setInitCardList(savedMovies);
+    setInitSavedCardList(savedMovies);
     setCardList(savedMovies);
   }
 
@@ -166,9 +160,9 @@ function App(props) {
   }
 
   function handleSearchMyMovies(searchValue, isShort) {
-    if (initCardList.length === 0) return setIsNotFound(true);
+    if (initSavedCardList.length === 0) return setIsNotFound(true);
     const regExp = new RegExp(searchValue.toLowerCase());
-    const filteredMovies = initCardList
+    const filteredMovies = initSavedCardList
       .filter((movie) => regExp.test(movie.nameRU.toLowerCase()))
       .filter((m) => isShort ? m.duration <= 40 : m.duration > 40)
     if (filteredMovies.length === 0) return setIsNotFound(true);
@@ -213,6 +207,20 @@ function App(props) {
   function handleCloseAllPopups() {
     setIsInfoTooltipOpen(false);
   }
+
+  React.useEffect(() => {
+    handleTokenCheck();
+
+    setIsSearching(true);
+    moviesApi.getMovies()
+      .then(movies => {
+        setInitCardList(movies);
+      })
+      .catch((err) => handleError(err))
+      .finally(() => setIsSearching(false))
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
