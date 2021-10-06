@@ -93,7 +93,7 @@ function App(props) {
         localStorage.removeItem('token');
         localStorage.removeItem('movies');
         props.history.push('/');
-        handleInfo(true, MESSAGES.logout)
+        handleInfo(true, MESSAGES.logout);
       })
       .catch((err) => handleError(err));
   }
