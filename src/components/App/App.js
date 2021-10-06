@@ -79,6 +79,11 @@ function App(props) {
       .catch(err => handleError(err));
   }
 
+  function uploadLocalStorage() {
+    setCardList(JSON.parse(localStorage.getItem('movies') || "[]"));
+    setIsResult(true);
+  }
+
   function handleLogout() {
     auth.signout(localStorage.getItem('token'))
       .then(() => {
@@ -86,6 +91,7 @@ function App(props) {
         mainApi.changeToken('');
         setCurrentUser(null);
         localStorage.removeItem('token');
+        localStorage.removeItem('movies');
         props.history.push('/');
         handleInfo(true, MESSAGES.logout)
       })
@@ -119,6 +125,7 @@ function App(props) {
     if (!searchValue) return handleInfo(false, MESSAGES.searchError);
     const filteredMovies = filter(initCardList, searchValue, isShort);
     if (filteredMovies?.length === 0) return setIsNotFound(true);
+    localStorage.setItem('movies', JSON.stringify(filteredMovies));
     setCardList(filteredMovies);
     setIsNotFound(false);
     setIsResult(true);
@@ -249,6 +256,7 @@ function App(props) {
             cardList={cardList}
             savedMovies={savedMovies}
             clearCardList={clearCardList}
+            uploadLocalStorage={uploadLocalStorage}
           />
           <ProtectedRoute
             path="/saved-movies"

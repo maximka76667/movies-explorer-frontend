@@ -8,6 +8,8 @@ function Movies(props) {
 
   React.useEffect(() => {
     props.clearCardList();
+    props.uploadLocalStorage();
+
     // eslint-disable-next-line
   }, [])
 

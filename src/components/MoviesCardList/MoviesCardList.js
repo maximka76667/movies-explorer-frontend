@@ -22,6 +22,7 @@ function MoviesCardList(props) {
 
   function renderCardList(countCardsOfWidth, cardList) {
     setIsAllCardsRendered(false);
+
     const cardsForRender = [];
 
     const countCardsForRender = location.pathname === "/saved-movies" ? props.cardList.length : countCardsOfWidth;
@@ -75,15 +76,12 @@ function MoviesCardList(props) {
   }, [countCardsOfWidth]);
 
   React.useEffect(() => {
-    if (cardList.length === 0) {
-      setIsAllCardsRendered(true);
-    }
-  }, [cardList]);
-
-  React.useEffect(() => {
     window.addEventListener('resize', checkCountOfCardsCallback)
 
     checkCountOfCards();
+
+    renderCardList(countCardsOfWidth, []);
+    setIsAllCardsRendered(false);
 
     return () => {
       window.removeEventListener('resize', checkCountOfCardsCallback)
