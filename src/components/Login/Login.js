@@ -97,7 +97,7 @@ function Login(props) {
             <input className={passwordInputClassName} name="password" type="password" value={password} onChange={handlePasswordInputChange} required />
             <p className="login__form-error">{passwordError}</p>
           </div>
-          <button className="login__submit-button" type="submit" disabled={!isSubmitValid}>Войти</button>
+          <button className="login__submit-button" type="submit" disabled={!isSubmitValid || props.isLoading}>Войти</button>
         </form>
         <p className="login__register">Ещё не зарегистрированы?<Link className="login__register-link" to="/signup">Регистрация</Link></p>
       </div>

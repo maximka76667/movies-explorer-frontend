@@ -52,12 +52,14 @@ function App(props) {
 
   // Auth
   function handleLogin({ email, password }) {
+    setIsLoading(true);
     auth.login({ email, password })
       .then((data) => {
         if (data.token) handleAuth(data.token);
         handleInfo(true, MESSAGES.auth);
       })
-      .catch(err => handleError(err));
+      .catch(err => handleError(err))
+      .finally(() => setIsLoading(false))
   }
 
   function handleAuth(token) {
@@ -99,12 +101,14 @@ function App(props) {
   }
 
   function handleRegister({ name, email, password }) {
+    setIsLoading(true);
     auth.register({ name, email, password })
       .then(() => {
         handleInfo(true, MESSAGES.register)
         handleLogin({ email, password });
       })
       .catch((err) => handleError(err))
+      .finally(() => setIsLoading(false))
   }
 
   function handleTokenCheck() {

@@ -126,7 +126,7 @@ function Register(props) {
             <input className={passwordInputClassName} name="password" type="password" value={password} onChange={handlePasswordInputChange} required />
             <p className="register__form-error">{passwordError}</p>
           </div>
-          <button className="register__submit-button" type="submit" disabled={!isSubmitValid}>Зарегистрироваться</button>
+          <button className="register__submit-button" type="submit" disabled={!isSubmitValid || props.isLoading}>Зарегистрироваться</button>
         </form>
         <p className="register__login">Уже зарегистрированы?<Link className="register__login-link" to="/signin">Войти</Link></p>
       </div>

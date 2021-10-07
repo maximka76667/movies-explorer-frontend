@@ -111,7 +111,7 @@ function Profile(props) {
               <input className={inputEmailClassName} onChange={handleChangeEmail} type="email" name="email" value={email} disabled={!props.isEdit} required />
             </div>
           </div>
-          <button className="profile__edit-button" type="submit" disabled={props.isEdit ? !isSubmitValid : false}>{props.isEdit ? props.isLoading ? "Загрузка..." : "Сохранить" : "Редактировать"}</button>
+          <button className="profile__edit-button" type="submit" disabled={props.isEdit ? !isSubmitValid || props.isLoading : false}>{props.isEdit ? props.isLoading ? "Загрузка..." : "Сохранить" : "Редактировать"}</button>
           <button className="profile__exit-button" onClick={handleLogout}>Выйти из аккаунта</button>
         </form>
       </div>
