@@ -55,6 +55,7 @@ function App(props) {
     auth.login({ email, password })
       .then((data) => {
         if (data.token) handleAuth(data.token);
+        handleInfo(true, MESSAGES.auth);
       })
       .catch(err => handleError(err));
   }
@@ -65,7 +66,6 @@ function App(props) {
       .then((res) => {
         localStorage.setItem('token', token);
         setLoggedIn(true);
-        handleInfo(true, MESSAGES.auth)
         mainApi.changeToken(token);
         setCurrentUser(res.user);
         if (requestedPathname === '/signin' || requestedPathname === '/signup') props.history.push('/movies')
