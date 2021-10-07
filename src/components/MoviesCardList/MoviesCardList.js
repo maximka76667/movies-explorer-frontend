@@ -76,6 +76,10 @@ function MoviesCardList(props) {
   }, [countCardsOfWidth]);
 
   React.useEffect(() => {
+    if (cardList.length === 0) return setIsAllCardsRendered(true);
+  }, [cardList])
+
+  React.useEffect(() => {
     window.addEventListener('resize', checkCountOfCardsCallback)
 
     checkCountOfCards();
