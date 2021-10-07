@@ -10,13 +10,14 @@
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  height: 200px;
 }
 
-.card__poster:after {
+.card__save-button {
+  border: 0;
   display: flex;
   visibility: hidden;
   opacity: 0;
-  content: "Сохранить";
   width: 72px;
   height: 21px;
   position: absolute;
@@ -35,19 +36,19 @@
   background-color: #f9f9f9;
   border-radius: 30px;
   overflow: hidden;
+  cursor: pointer;
 }
 
-.card__poster:hover:after {
+.card:hover .card__save-button {
   display: flex;
   visibility: visible;
   opacity: 1;
 }
 
-.card__poster_saved:after {
+.card_saved .card__save-button {
   display: flex;
   visibility: visible;
   opacity: 1;
-  content: "";
   width: 21px;
   height: 21px;
   background: url("../../images/check-icon.svg") 50% 50% no-repeat;
@@ -56,8 +57,16 @@
   padding: 5px;
 }
 
-.card__poster_saved:hover:after {
+.saved-movies .card_saved .card__save-button {
+  background: transparent;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.card_saved:hover .card__save-button {
   background: url("../../images/cancel-icon.svg") 50% 50% no-repeat;
+  opacity: 1;
+  visibility: visible;
 }
 
 .card__poster-img {
@@ -95,6 +104,12 @@
   padding: 3px 4px;
 }
 
+@media (max-width: 800px) {
+  .card__poster {
+    height: 190px;
+  }
+}
+
 @media (max-width: 650px) {
   .card__info {
     padding: 16px 0;
@@ -110,5 +125,9 @@
     margin: 0 0 0 8px;
     font-size: 11px;
     line-height: 10px;
+  }
+
+  .card__poster {
+    min-height: 168px;
   }
 }

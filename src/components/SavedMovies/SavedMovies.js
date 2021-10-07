@@ -6,21 +6,32 @@ import Footer from '../Footer/Footer';
 
 function SavedMovies(props) {
 
-  const [isSearching, setIsSearching] = React.useState(false);
+  React.useEffect(() => {
+    props.initSavedMovies();
+    // eslint-disable-next-line
+  }, [props.savedMovies])
 
-  function search(e) {
-    e.preventDefault();
-    setIsSearching(true);
-    setTimeout(() => {
-      setIsSearching(false);
-    }, 1000)
-  }
   return (
     <>
-      <Header />
+      <Header loggedIn={props.loggedIn} />
       <main className="saved-movies">
-        <SearchForm onSubmit={search} />
-        <MoviesCardList isSearching={isSearching} />
+        <SearchForm onSubmit={props.onSearchMyMovies} />
+        <MoviesCardList
+          clearCardList={props.clearCardList}
+          renderedCardList={props.renderedCardList}
+          isAllCardsRendered={props.isAllCardsRendered}
+          countCardsOfWidth={props.countCardsOfWidth}
+          setRenderedCardList={props.setRenderedCardList}
+          setIsAllCardsRendered={props.setIsAllCardsRendered}
+          setCountCardsOfWidth={props.setCountCardsOfWidth}
+          isSearching={props.isSearching}
+          isResult={props.isResult}
+          cardList={props.cardList}
+          isNotFound={props.isNotFound}
+          onSaveMovie={props.onSaveMovie}
+          onUnsaveMovie={props.onUnsaveMovie}
+          savedMovies={props.savedMovies}
+        />
       </main>
       <Footer />
     </>

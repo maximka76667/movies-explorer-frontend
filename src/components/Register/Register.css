@@ -44,6 +44,7 @@
 
 .register__form-input_error {
   color: #ff3055;
+  border-bottom: 1px solid #ff3055;
 }
 
 .register__form-error {
@@ -65,10 +66,18 @@
   outline: 0;
   color: #fff;
   transition: all 0.3s;
+  cursor: pointer;
 }
 
 .register__submit-button:hover {
   background-color: #2be080;
+}
+
+.register__submit-button:disabled {
+  background-color: #fff;
+  border: 1px solid grey;
+  color: #000;
+  cursor: auto;
 }
 
 .register__login {

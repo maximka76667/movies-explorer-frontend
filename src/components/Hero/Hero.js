@@ -6,7 +6,7 @@ import Promo from "../Promo/Promo";
 function Hero(props) {
   return (
     <div className="hero">
-      <Header />
+      <Header loggedIn={props.loggedIn} />
       <Promo />
       <NavTab />
     </div>

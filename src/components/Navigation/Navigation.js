@@ -1,15 +1,12 @@
 import './Navigation.css'
 import { NavLink as Link } from 'react-router-dom'
-import { useLocation } from 'react-router';
 import React from 'react';
 
 function Navigation(props) {
-  const location = useLocation();
-
   return (
     <>
       {
-        location.pathname !== '/' ?
+        props.loggedIn ?
           (
             <nav className={`nav ${props.isMenuOpen ? 'nav_open' : ''} nav_with-menu`}>
               <div className="nav__burger-icon" onClick={props.toggleMenu}></div>
