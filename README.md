@@ -1,4 +1,5 @@
-# movies-explorer-frontend
+# Movies Explorer
 
-IP: 62.84.123.126  
-URL: https://max76667.movies.nomoredomains.club/
+## Project with searching and saving movies.  
+URL: https://max76667.movies.nomoredomains.club  
+Project made with React and beatfilm-movies API.  
