@@ -3,7 +3,7 @@
 ## Description
 My final project of Yandex Praktikum course of web developing.  
 
-## Stack
+## Tech Stack
 React.js and beatfilm-movies API (https://api.nomoreparties.co/beatfilm-movies).  
 
 ## Server
