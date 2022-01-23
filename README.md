@@ -1,5 +1,11 @@
 # Movies Explorer
 
-## Project with searching and saving movies.  
-URL: https://max76667.movies.nomoredomains.club  
-Project made with React and beatfilm-movies API.  
+## Description
+My final project of Yandex Praktikum course of web developing.  
+
+## Stack
+React.js and beatfilm-movies API (https://api.nomoreparties.co/beatfilm-movies).  
+
+## Server
+Server part is made with express.js and Yandex Cloud Virtual Machine.  
+Server: https://github.com/maximka76667/movies-explorer-api
