@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/movies-explorer-frontend/static/css/main.8d30755d.chunk.css",
-    "main.js": "/movies-explorer-frontend/static/js/main.918adf77.chunk.js",
-    "main.js.map": "/movies-explorer-frontend/static/js/main.918adf77.chunk.js.map",
+    "main.js": "/movies-explorer-frontend/static/js/main.3676459f.chunk.js",
+    "main.js.map": "/movies-explorer-frontend/static/js/main.3676459f.chunk.js.map",
     "runtime-main.js": "/movies-explorer-frontend/static/js/runtime-main.6e787deb.js",
     "runtime-main.js.map": "/movies-explorer-frontend/static/js/runtime-main.6e787deb.js.map",
-    "static/js/2.2e85b239.chunk.js": "/movies-explorer-frontend/static/js/2.2e85b239.chunk.js",
-    "static/js/2.2e85b239.chunk.js.map": "/movies-explorer-frontend/static/js/2.2e85b239.chunk.js.map",
+    "static/js/2.4dc643a1.chunk.js": "/movies-explorer-frontend/static/js/2.4dc643a1.chunk.js",
+    "static/js/2.4dc643a1.chunk.js.map": "/movies-explorer-frontend/static/js/2.4dc643a1.chunk.js.map",
     "static/js/3.aae32119.chunk.js": "/movies-explorer-frontend/static/js/3.aae32119.chunk.js",
     "static/js/3.aae32119.chunk.js.map": "/movies-explorer-frontend/static/js/3.aae32119.chunk.js.map",
     "index.html": "/movies-explorer-frontend/index.html",
     "static/css/main.8d30755d.chunk.css.map": "/movies-explorer-frontend/static/css/main.8d30755d.chunk.css.map",
-    "static/js/2.2e85b239.chunk.js.LICENSE.txt": "/movies-explorer-frontend/static/js/2.2e85b239.chunk.js.LICENSE.txt",
+    "static/js/2.4dc643a1.chunk.js.LICENSE.txt": "/movies-explorer-frontend/static/js/2.4dc643a1.chunk.js.LICENSE.txt",
     "static/media/index.css": "/movies-explorer-frontend/static/media/Inter-Regular.9cd7588f.ttf",
     "static/media/about-me-photo.0e66065c.jpg": "/movies-explorer-frontend/static/media/about-me-photo.0e66065c.jpg",
     "static/media/Navigation.css": "/movies-explorer-frontend/static/media/close-icon.80dfd5bd.svg",
@@ -23,8 +23,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.6e787deb.js",
-    "static/js/2.2e85b239.chunk.js",
+    "static/js/2.4dc643a1.chunk.js",
     "static/css/main.8d30755d.chunk.css",
-    "static/js/main.918adf77.chunk.js"
+    "static/js/main.3676459f.chunk.js"
   ]
 }
