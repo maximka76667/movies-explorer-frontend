@@ -60,7 +60,7 @@ class Auth {
 }
 
 const auth = new Auth({
-  baseUrl: 'https://api.max76667.movies.nomoredomains.club'
+  baseUrl: 'https://calm-everglades-07404.herokuapp.com'
 })
 
 export default auth;

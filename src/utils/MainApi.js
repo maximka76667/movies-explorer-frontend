@@ -84,7 +84,7 @@ class Api {
 }
 
 const mainApi = new Api({
-  baseUrl: 'https://api.max76667.movies.nomoredomains.club',
+  baseUrl: 'https://calm-everglades-07404.herokuapp.com',
 })
 
 export default mainApi;
