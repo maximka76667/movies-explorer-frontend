@@ -1,30 +1,30 @@
 {
   "files": {
-    "main.css": "/movies-explorer-frontend/static/css/main.8d30755d.chunk.css",
-    "main.js": "/movies-explorer-frontend/static/js/main.3676459f.chunk.js",
-    "main.js.map": "/movies-explorer-frontend/static/js/main.3676459f.chunk.js.map",
-    "runtime-main.js": "/movies-explorer-frontend/static/js/runtime-main.6e787deb.js",
-    "runtime-main.js.map": "/movies-explorer-frontend/static/js/runtime-main.6e787deb.js.map",
-    "static/js/2.4dc643a1.chunk.js": "/movies-explorer-frontend/static/js/2.4dc643a1.chunk.js",
-    "static/js/2.4dc643a1.chunk.js.map": "/movies-explorer-frontend/static/js/2.4dc643a1.chunk.js.map",
-    "static/js/3.aae32119.chunk.js": "/movies-explorer-frontend/static/js/3.aae32119.chunk.js",
-    "static/js/3.aae32119.chunk.js.map": "/movies-explorer-frontend/static/js/3.aae32119.chunk.js.map",
+    "main.css": "/movies-explorer-frontend/static/css/main.2934bf93.chunk.css",
+    "main.js": "/movies-explorer-frontend/static/js/main.54b72ed3.chunk.js",
+    "main.js.map": "/movies-explorer-frontend/static/js/main.54b72ed3.chunk.js.map",
+    "runtime-main.js": "/movies-explorer-frontend/static/js/runtime-main.834c3111.js",
+    "runtime-main.js.map": "/movies-explorer-frontend/static/js/runtime-main.834c3111.js.map",
+    "static/js/2.9a3f548f.chunk.js": "/movies-explorer-frontend/static/js/2.9a3f548f.chunk.js",
+    "static/js/2.9a3f548f.chunk.js.map": "/movies-explorer-frontend/static/js/2.9a3f548f.chunk.js.map",
+    "static/js/3.55473dc9.chunk.js": "/movies-explorer-frontend/static/js/3.55473dc9.chunk.js",
+    "static/js/3.55473dc9.chunk.js.map": "/movies-explorer-frontend/static/js/3.55473dc9.chunk.js.map",
     "index.html": "/movies-explorer-frontend/index.html",
-    "static/css/main.8d30755d.chunk.css.map": "/movies-explorer-frontend/static/css/main.8d30755d.chunk.css.map",
-    "static/js/2.4dc643a1.chunk.js.LICENSE.txt": "/movies-explorer-frontend/static/js/2.4dc643a1.chunk.js.LICENSE.txt",
+    "static/css/main.2934bf93.chunk.css.map": "/movies-explorer-frontend/static/css/main.2934bf93.chunk.css.map",
+    "static/js/2.9a3f548f.chunk.js.LICENSE.txt": "/movies-explorer-frontend/static/js/2.9a3f548f.chunk.js.LICENSE.txt",
     "static/media/index.css": "/movies-explorer-frontend/static/media/Inter-Regular.9cd7588f.ttf",
     "static/media/about-me-photo.0e66065c.jpg": "/movies-explorer-frontend/static/media/about-me-photo.0e66065c.jpg",
-    "static/media/Navigation.css": "/movies-explorer-frontend/static/media/close-icon.80dfd5bd.svg",
-    "static/media/MoviesCard.css": "/movies-explorer-frontend/static/media/check-icon.93efa9bf.svg",
+    "static/media/Navigation.css": "/movies-explorer-frontend/static/media/close-icon.09da0492.svg",
+    "static/media/MoviesCard.css": "/movies-explorer-frontend/static/media/check-icon.34e77f9c.svg",
     "static/media/InfoTooltip.css": "/movies-explorer-frontend/static/media/close-icon-white.039f1f52.svg",
     "static/media/fail-icon.d4ce2a26.svg": "/movies-explorer-frontend/static/media/fail-icon.d4ce2a26.svg",
-    "static/media/Promo.css": "/movies-explorer-frontend/static/media/landing-logo.48502063.svg",
+    "static/media/Promo.css": "/movies-explorer-frontend/static/media/landing-logo.c2691b72.svg",
     "static/media/success-icon.a9eb6caf.svg": "/movies-explorer-frontend/static/media/success-icon.a9eb6caf.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.6e787deb.js",
-    "static/js/2.4dc643a1.chunk.js",
-    "static/css/main.8d30755d.chunk.css",
-    "static/js/main.3676459f.chunk.js"
+    "static/js/runtime-main.834c3111.js",
+    "static/js/2.9a3f548f.chunk.js",
+    "static/css/main.2934bf93.chunk.css",
+    "static/js/main.54b72ed3.chunk.js"
   ]
 }
