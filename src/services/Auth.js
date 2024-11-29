@@ -10,57 +10,54 @@ class Auth {
 
   register(data) {
     return fetch(`${this._baseUrl}/signup`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        "name": data.name,
-        "email": data.email,
-        "password": data.password,
-      })
-    })
-      .then(this._checkResponse);
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      }),
+    }).then(this._checkResponse);
   }
 
   login(data) {
     return fetch(`${this._baseUrl}/signin`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        "email": data.email,
-        "password": data.password,
-      })
-    })
-      .then(this._checkResponse)
+        email: data.email,
+        password: data.password,
+      }),
+    }).then(this._checkResponse);
   }
 
   signout(token) {
     return fetch(`${this._baseUrl}/signout`, {
-      method: 'GET',
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      }
-    })
+        Authorization: `Bearer ${token}`,
+      },
+    });
   }
 
   getEmail(token) {
     return fetch(`${this._baseUrl}/users/me`, {
-      method: 'GET',
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`
-      }
-    })
-      .then(this._checkResponse);
+        Authorization: `Bearer ${token}`,
+      },
+    }).then(this._checkResponse);
   }
 }
 
 const auth = new Auth({
-  baseUrl: 'https://calm-everglades-07404.herokuapp.com'
-})
+  baseUrl: "https://movies-explorer-api-858156816594.europe-southwest1.run.app",
+});
 
 export default auth;

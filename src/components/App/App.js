@@ -1,25 +1,24 @@
-import React from 'react';
-import './App.css';
-import Main from '../Main/Main'
-import { Route, withRouter, Switch } from 'react-router-dom'
-import SavedMovies from '../SavedMovies/SavedMovies';
-import Profile from '../Profile/Profile';
-import Register from '../Register/Register';
-import Login from '../Login/Login';
-import NotFound from '../NotFound/NotFound';
-import CurrentUserContext from '../../contexts/CurrentUserContext'
-import auth from '../../utils/Auth'
-import mainApi from '../../utils/MainApi';
-import moviesApi from '../../utils/MoviesApi'
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import Movies from '../Movies/Movies';
-import InfoTooltip from '../InfoTooltip/InfoTooltip';
-import { useLocation } from 'react-router';
-import filter from '../../utils/filter';
-import { MESSAGES } from '../../config';
+import React from "react";
+import "./App.css";
+import Main from "../Main/Main";
+import { Route, withRouter, Switch } from "react-router-dom";
+import SavedMovies from "../SavedMovies/SavedMovies";
+import Profile from "../Profile/Profile";
+import Register from "../Register/Register";
+import Login from "../Login/Login";
+import NotFound from "../NotFound/NotFound";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+import auth from "../../services/Auth";
+import mainApi from "../../services/MainApi";
+import moviesApi from "../../services/MoviesApi";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import Movies from "../Movies/Movies";
+import InfoTooltip from "../InfoTooltip/InfoTooltip";
+import { useLocation } from "react-router";
+import filter from "../../utils/filter";
+import { MESSAGES } from "../../config";
 
 function App(props) {
-
   const location = useLocation();
 
   // Auth
@@ -48,53 +47,58 @@ function App(props) {
   // InfoTooltip
   const [resultSuccessful, setResultSuccessful] = React.useState(false);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
-  const [infoMessage, setInfoMessage] = React.useState('');
+  const [infoMessage, setInfoMessage] = React.useState("");
 
   // Auth
   function handleLogin({ email, password }) {
     setIsLoading(true);
-    auth.login({ email, password })
+    auth
+      .login({ email, password })
       .then((data) => {
         if (data.token) handleAuth(data.token);
         handleInfo(true, MESSAGES.auth);
       })
-      .catch(err => handleError(err))
-      .finally(() => setIsLoading(false))
+      .catch((err) => handleError(err))
+      .finally(() => setIsLoading(false));
   }
 
   function handleAuth(token) {
     const requestedPathname = location.pathname;
-    auth.getEmail(token)
+    auth
+      .getEmail(token)
       .then((res) => {
-        localStorage.setItem('token', token);
+        localStorage.setItem("token", token);
         setLoggedIn(true);
         mainApi.changeToken(token);
         setCurrentUser(res.user);
-        if (requestedPathname === '/signin' || requestedPathname === '/signup') props.history.push('/movies')
+        if (requestedPathname === "/signin" || requestedPathname === "/signup")
+          props.history.push("/movies");
         else props.history.push(requestedPathname);
-        mainApi.getSavedMovies()
-          .then((movies) => {
-            const filteredMovies = movies.movies.filter((movie) => movie.owner === res.user._id);
-            setSavedMovies(filteredMovies);
-          })
+        mainApi.getSavedMovies().then((movies) => {
+          const filteredMovies = movies.movies.filter(
+            (movie) => movie.owner === res.user._id
+          );
+          setSavedMovies(filteredMovies);
+        });
       })
-      .catch(err => handleError(err));
+      .catch((err) => handleError(err));
   }
 
   function uploadLocalStorage() {
-    setCardList(JSON.parse(localStorage.getItem('movies') || "[]"));
+    setCardList(JSON.parse(localStorage.getItem("movies") || "[]"));
     setIsResult(true);
   }
 
   function handleLogout() {
-    auth.signout(localStorage.getItem('token'))
+    auth
+      .signout(localStorage.getItem("token"))
       .then(() => {
         setLoggedIn(false);
-        mainApi.changeToken('');
+        mainApi.changeToken("");
         setCurrentUser(null);
-        localStorage.removeItem('token');
-        localStorage.removeItem('movies');
-        props.history.push('/');
+        localStorage.removeItem("token");
+        localStorage.removeItem("movies");
+        props.history.push("/");
         handleInfo(true, MESSAGES.logout);
       })
       .catch((err) => handleError(err));
@@ -102,18 +106,19 @@ function App(props) {
 
   function handleRegister({ name, email, password }) {
     setIsLoading(true);
-    auth.register({ name, email, password })
+    auth
+      .register({ name, email, password })
       .then(() => {
-        handleInfo(true, MESSAGES.register)
+        handleInfo(true, MESSAGES.register);
         handleLogin({ email, password });
       })
       .catch((err) => handleError(err))
-      .finally(() => setIsLoading(false))
+      .finally(() => setIsLoading(false));
   }
 
   function handleTokenCheck() {
-    if (localStorage.getItem('token')) {
-      const token = localStorage.getItem('token');
+    if (localStorage.getItem("token")) {
+      const token = localStorage.getItem("token");
       return handleAuth(token);
     }
   }
@@ -129,7 +134,7 @@ function App(props) {
     if (!searchValue) return handleInfo(false, MESSAGES.searchError);
     const filteredMovies = filter(initCardList, searchValue, isShort);
     if (filteredMovies?.length === 0) return setIsNotFound(true);
-    localStorage.setItem('movies', JSON.stringify(filteredMovies));
+    localStorage.setItem("movies", JSON.stringify(filteredMovies));
     setCardList(filteredMovies);
     setIsNotFound(false);
     setIsResult(true);
@@ -145,24 +150,28 @@ function App(props) {
 
   // Movie Card
   function handleSaveMovie(data) {
-    mainApi.saveMovie(data)
+    mainApi
+      .saveMovie(data)
       .then((movie) => setSavedMovies([movie.movie, ...savedMovies]))
-      .catch((err) => handleError(err))
+      .catch((err) => handleError(err));
   }
 
   function handleUnsaveMovie(id) {
-    mainApi.unsaveMovie(id)
+    mainApi
+      .unsaveMovie(id)
       .then((deletedCard) => {
-        const newSavedMovies = savedMovies.filter((movieCard) => deletedCard.movie._id !== movieCard._id)
+        const newSavedMovies = savedMovies.filter(
+          (movieCard) => deletedCard.movie._id !== movieCard._id
+        );
         setSavedMovies(newSavedMovies);
       })
-      .catch(err => console.log(err))
+      .catch((err) => console.log(err));
   }
 
   function handleSearchMyMovies(searchValue, isShort) {
     if (!searchValue) return handleInfo(false, MESSAGES.searchError);
     if (initSavedCardList.length === 0) return setIsNotFound(true);
-    const filteredMovies = filter(initSavedCardList, searchValue, isShort)
+    const filteredMovies = filter(initSavedCardList, searchValue, isShort);
     if (filteredMovies.length === 0) return setIsNotFound(true);
     setCardList(filteredMovies);
     setIsNotFound(false);
@@ -172,19 +181,20 @@ function App(props) {
   function handleUpdateUser({ name, email }) {
     if (isEdit) {
       setIsLoading(true);
-      mainApi.setProfileInfo({ name, email })
+      mainApi
+        .setProfileInfo({ name, email })
         .then((res) => {
           setCurrentUser(res.user);
-          handleInfo(true, MESSAGES.userUpdate)
+          handleInfo(true, MESSAGES.userUpdate);
         })
         .catch((err) => {
           setCurrentUser(currentUser);
-          handleError(err)
+          handleError(err);
         })
         .finally(() => {
           setIsLoading(false);
           setIsEdit(false);
-        })
+        });
     }
   }
 
@@ -195,7 +205,7 @@ function App(props) {
   // Others
   function handleError(error) {
     console.log(error);
-    handleInfo(false, MESSAGES.defaultError)
+    handleInfo(false, MESSAGES.defaultError);
   }
 
   function handleInfo(success, message) {
@@ -212,15 +222,16 @@ function App(props) {
     handleTokenCheck();
 
     setIsSearching(true);
-    moviesApi.getMovies()
-      .then(movies => {
+    moviesApi
+      .getMovies()
+      .then((movies) => {
         setInitCardList(movies);
       })
       .catch((err) => handleError(err))
-      .finally(() => setIsSearching(false))
+      .finally(() => setIsSearching(false));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -289,7 +300,7 @@ function App(props) {
           message={infoMessage}
         />
       </div>
-    </CurrentUserContext.Provider >
+    </CurrentUserContext.Provider>
   );
 }
 
